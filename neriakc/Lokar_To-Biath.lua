@@ -54,7 +54,6 @@ function event_trade(e)
 			e.other:Faction(e.self,236, 10);--Dark Bargainers			
 			e.other:Faction(e.self,370, 1);--Dreadguard Inner
 			e.other:Faction(e.self,334, 1);--Dreadguard Outer
-			e.other:Faction(e.self,236, 1);--Dark Bargainers
 			e.other:QuestReward(e.self,0,0,0,0,0,10); --Quarm exp data. Normally: 100
 			Red_Wine = Red_Wine - 1;
 		until Red_Wine == 0;
