@@ -32,7 +32,7 @@ function event_trade(e)
 			e.self:Emote("takes the Ghoulbane and places the other swords on either side of it. The sheath begins to gleam so intensely, you can see the bones inside Duriek's hands. After several minutes, there is a final, blinding flash. Duriek collapses to the ground. After a few moments, Duriek motions you closer and whispers, 'You have done well. I wish fate had been kinder to me and allowed me your aid years ago--I might have lived long enough to enjoy the fame of our combined efforts. I studied much of the tome you retrieved and have stumbled upon something that may be the key to unleashing darkness upon the face of Norrath forever. You must seek out a powerful lich by the name of Lhranc. Farewell, " .. e.other:GetCleanName() .. ".' With his last bit of energy, Duriek places the corrupted Ghoulbane in your hands.");
 			e.other:Faction(e.self,404,3); -- Faction: True Spirit
 			e.other:QuestReward(e.self,0,0,0,0,14367);
-			eq.depop_with_timer();
+			--eq.depop_with_timer();
 		end
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
