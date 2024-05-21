@@ -11,7 +11,7 @@ function event_signal(e)
 		if(qglobals[keeperName] == nil) then
 			-- eq.set_timer("13",300000); what is this referred to?
 			eq.set_global(keeperName,"1",3,"H1");
-			eq.unique_spawn(71575,0,0,996.3,910.5,192.3,18.0); -- NPC: Keeper_of_Souls
+			eq.unique_spawn(71575,0,0,-1484,720,146,8.0); -- NPC: Keeper_of_Souls
 			-- supposed to be 60-85 minute timer
 			--eq.set_timer("soul",math.random(1920000) + 2880000);
 		end
