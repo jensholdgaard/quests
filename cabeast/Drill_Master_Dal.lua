@@ -47,7 +47,7 @@ function event_trade(e)
 		e.other:Faction(e.self, 445,1); -- Faction: Scaled Mystics
 		e.other:Faction(e.self, 442,1); -- Faction: Crusaders of Greenmist
 		e.other:Faction(e.self, 444,1); -- Faction: Swift Tails
-		e.other:QuestReward(e.self,0,math.random(15),0,0,12674,250); -- Item: Curscale Buckler
+		e.other:QuestReward(e.self,0,math.random(15),0,0,12674,0); -- Item: Curscale Buckler
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
 end

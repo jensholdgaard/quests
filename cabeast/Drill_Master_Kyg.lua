@@ -51,7 +51,7 @@ function event_trade(e)
 		e.other:Faction(e.self, 445,1); -- Faction: Scaled Mystics
 		e.other:Faction(e.self, 442,1); -- Faction: Crusaders of Greenmist
 		e.other:Faction(e.self, 444,1); -- Faction: Swift Tails
-		e.other:QuestReward(e.self,0,0,0,0,12475,500); -- Item: Footman Head Plans
+		e.other:QuestReward(e.self,0,0,0,0,12475,0); -- Item: Footman Head Plans
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
 end

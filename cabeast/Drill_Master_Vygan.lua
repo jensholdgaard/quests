@@ -65,7 +65,7 @@ function event_trade(e)
 		e.other:Faction(e.self,442,25);		--Crusader of Greenmist
 		e.other:Faction(e.self,444,25); 	--Swift Tails
 			-- Confirmed Live Experience and Faction
-		e.other:QuestReward(e.self,{copper = math.random(0,5),silver = math.random(0,2),itemid = 5130,exp = 500});	--Partisan's Pike
+		e.other:QuestReward(e.self,{copper = math.random(0,5),silver = math.random(0,2),itemid = 5130,exp = 0});	--Partisan's Pike
 	elseif(e.other:GetFactionValue(e.self) >= 100 and item_lib.check_turn_in(e.self, e.trade, {item1 = 12675, item2 = 12677, item3 = 5130},1,text1)) then
 		e.self:Say("You have perfomed just as expected. I bestow upon you the rank of militiaman. Here is your new pike. Past this, you shall require the [geozite tool] to upgrade your future pikes and mancatchers. We see much promise in you, militiaman. Go forth to serve the realm.");
 		e.other:Faction(e.self,441,10); 	--Legion of Cabilis
@@ -73,7 +73,7 @@ function event_trade(e)
 		e.other:Faction(e.self,445,2); 	--Scaled Mystics
 		e.other:Faction(e.self,442,2);		--Crusader of Greenmist
 		e.other:Faction(e.self,444,2); 	--Swift Tails
-		e.other:QuestReward(e.self,0,0,0,0,5131,200); -- Item: Militia's Pike
+		e.other:QuestReward(e.self,0,0,0,0,5131,0); -- Item: Militia's Pike
 	elseif(e.other:GetFactionValue(e.self) >= 100 and item_lib.check_turn_in(e.self, e.trade, {item1 = 12658})) then
 		e.self:Say("You are a true warrior of Cabilis. You obviously are aware that in order to upgrade your pike you shall need a [geozite tool]. Take this note to the Lord of the outer gates. He desires a young warrior for a small task. Do this and he is instructed to reward you with the tool.");
 		e.other:Faction(e.self,441,5); 	--Legion of Cabilis
@@ -81,7 +81,7 @@ function event_trade(e)
 		e.other:Faction(e.self,445,1); 	--Scaled Mystics
 		e.other:Faction(e.self,442,1);		--Crusader of Greenmist
 		e.other:Faction(e.self,444,1); 	--Swift Tails
-		e.other:QuestReward(e.self,math.random(10),math.random(10),math.random(3),0,eq.ChooseRandom(18213,18211,18210),200); -- Item(s): Note to Iksar Lord (18213), Note to Iksar Lord (18211), Note to Iksar Lord (18210)
+		e.other:QuestReward(e.self,math.random(10),math.random(10),math.random(3),0,eq.ChooseRandom(18213,18211,18210),0); -- Item(s): Note to Iksar Lord (18213), Note to Iksar Lord (18211), Note to Iksar Lord (18210)
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
 end
