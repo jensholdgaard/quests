@@ -51,7 +51,7 @@ function event_trade(e)
 		e.other:Faction(e.self,331,7,0); -- Faction: Merchants of Highpass
 		e.other:Faction(e.self,230,2,0); -- Faction: Corrupt Qeynos Guards
 		e.other:Faction(e.self,330,2,0); -- Faction: The Freeport Militia
-		e.other:QuestReward(e.self,0,0,100,25,0,10000);
+		e.other:QuestReward(e.self,0,0,0,0,0,10000);
 		eq.unique_spawn(5088,0,0,336,10,45,225); -- NPC: Stanos_Herkanor
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
