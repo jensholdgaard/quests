@@ -42,7 +42,7 @@ function event_trade(e)
 		e.other:Faction(e.self,312,3); -- +Storm Guard
 		e.other:Faction(e.self,441,-1); -- -Legion of Cabilis
 		e.other:Faction(e.self,313,-1); -- -Pirates of Gunthak
-		e.other:QuestReward(e.self,7,12,3,0,12968,100000); -- Scroll of Brain Bite
+		e.other:QuestReward(e.self,7,12,3,0,12968,2000); -- Scroll of Brain Bite
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
 end

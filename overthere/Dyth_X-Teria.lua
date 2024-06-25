@@ -35,7 +35,7 @@ function event_trade(e)
 	elseif(item_lib.check_turn_in(e.self, e.trade, {item1 = 12965, item2 = 12966, item3 = 12967},1,text)) then-- Bottle of Swirling Smoke (Hampton), Bottle of Swirling Smoke (Mardon), Bottle of Swirling Smoke (Ryla)
 		e.self:Emote("empties the bottle's smoke into a very large glass urn filled with similar swirling smoke. You think you hear the cries of a thousand tortured souls. He then closes the urn and hands you a scroll. 'Here is your reward. It will blast a foe's brain and hopefully, they may forget their hatred.");
 		e.other:Faction(e.self,318, 30);--Add some Venril Sathir faction
-		e.other:QuestReward(e.self,0,0,0,0,12968,3322176);--Scroll of Brain Bite--3% level 45 xp,
+		e.other:QuestReward(e.self,0,0,0,0,12968,2000);
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
 end

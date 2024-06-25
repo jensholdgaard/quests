@@ -37,7 +37,7 @@ function event_trade(e)
 		e.other:Faction(e.self,312,7);   -- Storm Guard better
 		e.other:Faction(e.self,441,-1);  -- Legion of Cabilis worse
 		e.other:Faction(e.self,313,-1);  -- Pirates of Gunthak worse
-		e.other:QuestReward(e.self,0,0,0,0,5057,700000);
+		e.other:QuestReward(e.self,0,0,0,0,5057,7000);
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
 end
