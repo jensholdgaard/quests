@@ -25,7 +25,7 @@ function event_trade(e)
 	local item_lib = require("items");
 	local text = "Yes yes, now where is the rest of the medallion?";	
 	
-	if(item_lib.check_turn_in(e.self, e.trade, {item1 = 19959, item2 = 19960, item3 = 19961},1,text)) then
+	if(item_lib.check_turn_in_nomq(e.self, e.trade, {item1 = 19959, item2 = 19960, item3 = 19961},1,text)) then
 		e.self:Emote("tinkers with the three pieces and snaps the pieces together. 'Wow.. You've done it.. but I suddenly feel very.. strange.. This medallion is cursed! Here, you take it!'");
 		e.other:QuestReward(e.self,0,0,0,0,19954,100);
 	end
