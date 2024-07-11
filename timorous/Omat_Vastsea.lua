@@ -28,6 +28,14 @@ function event_trade(e)
 		e.self:Say("I see now that Zordak Ragefire and the exiled elder dragon Zordakalicus were the same being. That explains how he resisted our attempts to divine his affairs and past. Each of these orbs I have granted you represents one of the Triumvirate. Jhassad Oceanson awaits on the shore below to perform the ritual that will merge the orbs into a single Orb of the Triumvirate and summon an avatar from the Plane of Water. Present the Orb of the Triumvirate to the Avatar of Water when it arrives and allow your destiny to be unraveled.");
 		e.other:QuestReward(e.self,0,0,0,0,28050,100000); --Orb of Vapor
 		eq.unique_spawn(96074,0,0,-1781,-11959,14.3,1); --Jhassad Oceanson
+	elseif(item_lib.check_turn_in(e.self, e.trade, {item1 = 28050})) then -- Orb of Vapor (to respawn Jhassad Oceanson in case of depop)
+		e.self:Say("Jhassad Oceanson awaits on the shore below to perform the ritual that will merge the orbs into a single Orb of the Triumvirate and summon an avatar from the Plane of Water. Present the Orb of the Triumvirate to the Avatar of Water when it arrives and allow your destiny to be unraveled.");
+		e.other:QuestReward(e.self,0,0,0,0,28050); --Orb of Vapor
+		eq.unique_spawn(96074,0,0,-1781,-11959,14.3,1); --Jhassad Oceanson
+	elseif(item_lib.check_turn_in(e.self, e.trade, {item1 = 28023})) then -- Orb of the Triumvirate (to respawn Avatar of Water in case of depop)	
+		e.self:Say("The Avatar of Water approaches. You must hand him the Orb of the Triumvirate and it will be decided if it is your destiny to wield the Nem Ankh Sprinkler.");
+		e.other:QuestReward(e.self,0,0,0,0,28023); -- Orb of the Triumvirate
+		eq.unique_spawn(96086,21,0,-1886,-11661,1,192); --Avatar of Water
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
 end
