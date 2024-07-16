@@ -30,6 +30,10 @@ function event_say(e)
 		end
 	elseif(e.message:findi("plane") and qglobals[sirranName] == "1") then
 		e.self:Say("Ahah! Wise you are and tell you I will. Hrm? Don't have wings, do you? Fairies have swords! Fairies stole my lucky feet! Hand me them, one by one, and be in for a treat! Haha!");
+	elseif(e.message:findi("please go away")) then
+		e.self:Say("Hah! Since you asked so nicely, I will abide! Hum! Off I go!");
+		eq.stop_timer("bye");
+		eq.depop();
 	elseif(e.message:findi("go away") and qglobals[sirranName] == "1") then
 		e.self:Say("Oh, so you want me gone, eh? So be it.  Your wish is my command.  Wait?  I'm not listening to you!  Go away!");
 		eq.attack(e.other:GetName());
