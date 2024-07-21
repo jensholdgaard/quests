@@ -1,4 +1,9 @@
 function event_spawn(e)
+	if (eq.get_zone_guild_id() ~= 0xFFFFFFFF) then
+		eq.debug("We are in an instance, ignoring event_spawn for " .. e.self:GetName());
+    	eq.depop();
+    end
+
 	local zone_time = eq.get_zone_time();
 	local hour = zone_time["zone_hour"];
 	local minute = zone_time["zone_minute"];
