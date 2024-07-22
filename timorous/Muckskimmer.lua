@@ -1,13 +1,13 @@
 function event_spawn(e)
-	if (eq.get_zone_guild_id() ~= 0xFFFFFFFF) then
-		eq.debug("We are in an instance, ignoring event_spawn for " .. e.self:GetName());
-    	eq.depop();
-    end
-
-	local zone_time = eq.get_zone_time();
-	local hour = zone_time["zone_hour"];
-	local minute = zone_time["zone_minute"];
-	eq.debug("Shuttle spawned! Name is: " .. e.self:GetName() .. " Time is: " .. hour ..":" .. minute .. "", 1);
+    if (eq.get_zone_guild_id() ~= -1) then
+		eq.debug("We are in an instance (" .. eq.get_zone_guild_id() .. "), ignoring event_spawn for " .. e.self:GetName());
+		eq.depop();
+	else
+		local zone_time = eq.get_zone_time();
+		local hour = zone_time["zone_hour"];
+		local minute = zone_time["zone_minute"];
+		eq.debug("Shuttle spawned! Name is: " .. e.self:GetName() .. " Time is: " .. hour ..":" .. minute .. "", 1);
+	end
 end
 
 function event_waypoint_arrive(e)
