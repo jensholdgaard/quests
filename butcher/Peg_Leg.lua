@@ -1,6 +1,5 @@
 function event_death_complete(e)
-	local expansion_flag = eq.get_current_expansion();
-	if(eq.get_current_expansion() >= 2.0) then
+	if(eq.is_the_ruins_of_kunark_enabled()) then
 		eq.spawn2(68251,0,0,e.self:GetX(),e.self:GetY(),e.self:GetZ(),e.self:GetHeading());
 	end
 end
