@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Greetings to you " .. e.other:GetCleanName() .. ". I welcome you to the Scouts of Tunare training halls. I have seen many scouts pass through my halls with unimaginable abilities and daggers guided by Tunare herself. I cannot say for certain what the future has in store for you. But I can say that wherever your adventures may take you it is always wise to have the proper [training].");
 		elseif(e.message:findi("training")) then
@@ -42,9 +42,8 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
 	
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 27535,item2 =  27536,item3 =  27536})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 27535,item2 =  27536,item3 =  27536})) then
 		e.self:Say("Excllent!  Here's your reward."); -- text made up
 		e.other:QuestReward(e.self,0,0,0,0,27530,500);
 	end	

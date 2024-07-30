@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Hail " .. e.other:GetCleanName() .. ". Know that only within these few passageways and rooms whose borders are marked by the symbol of the Circle of Unseen Hands can we speak freely of our organization and its undertakings. Neither the streets of the city above nor the sewers and catacombs are free of ears that would harm the Circle of Unseen Hands should they hear of our [secrets].");
 		elseif(e.message:findi("secret")) then
@@ -36,8 +36,8 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 19942})) then
+	
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 19942})) then
 		e.self:Say("Excellent! It is fortunate you recovered this message in time. Take this Rusty Unseen Hands Dagger to a forge and sharpen it with a sharpening stone. It may take you several attempts if you are unfamiliar with the process. Once that is accomplished bring me the sharpened dagger, a gnoll fang, and a large king snake skin and I will put the finishing touches on the weapon for you.");
 		-- Confirmed Live Experience and Faction
 		e.other:Faction(e.self,223,10,0);		-- Circle of Unseen Hands
@@ -46,7 +46,7 @@ function event_trade(e)
 		e.other:Faction(e.self,262,-1,0); 	-- Guards of Qeynos
 		e.other:Faction(e.self,273,1,0);		-- Kane Bayle
 		e.other:QuestReward(e.self,{itemid = 19943,exp = 1000}); -- rusty unseen hands dagger
-	elseif(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 19944,item2 = 13915,item3 = 19945})) then
+	elseif(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 19944,item2 = 13915,item3 = 19945})) then
 		e.self:Emote("fashions a grip out of the large king snake skin, fastens the gnoll fang to the heel of the hilt, and polishes the blade with a faintly glowing polish. 'Herei syour new weapon young rogue.'");
 		-- Confirmed Live Experience
 		e.other:QuestReward(e.self,{itemid = 20266,exp = 1000}); -- Dagger of Unseen Hands

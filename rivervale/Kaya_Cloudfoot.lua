@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("A pleasure to make your acquaintance " .. e.other:GetCleanName() .. ". I am Kaya Cloudfoot, first Paladin of the Storm Reapers. I traveled long ago when I was just a wee sprout to the city of Qeynos far to the west. It was there I grew under the tutelage of the Knights of Thunder, a noble order of paladins loyal to Karana, the Storm Lord. I have returned now to Rivervale to teach interested young halflings the ways of a Knight of the Storm Reapers so that we may defend Karanas people and lands from the [evil forces] that would see it destroyed.");
 		elseif(e.message:findi("evil forces")) then
@@ -27,7 +27,7 @@ function event_trade(e)
 		e.other:Faction(e.self,292,15,0); -- +Merchants of Rivervale
 		e.other:Faction(e.self,324,-15,0); -- -Unkempt Druids
 		e.other:QuestReward(e.self,0,0,0,0,13541,100); -- Jumjum Sack Tunic*
-	elseif(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 19688})) then
+	elseif(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 19688})) then
 		e.self:Say("Take this Dull Bravefoot Short Sword to the forge at Tagglefoots farm and sharpen it with a sharpening stone. It may take several attempts if you are unfamiliar with the process. Once that is done present the blade and a large snake skin to Bodbin Gimple and he will put the finishing touches on the sword.");
 		e.other:Faction(e.self,355,10,0); -- +Storm Reapers
 		e.other:Faction(e.self,286,1,0); -- +Mayor Gubbin

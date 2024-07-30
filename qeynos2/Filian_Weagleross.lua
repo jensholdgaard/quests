@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Pleased to meet you " .. e.other:GetCleanName() .. ". I am Filian Weagleross High Priest of the glorious Rodcet Nife! I have recently taken upon some very [important duties] here in our temple so if your business is not urgent please excuse me.");
 		elseif(e.message:findi("important duties")) then

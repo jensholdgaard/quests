@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("Hail")) then
 			e.self:Say("So you are the next pathetic maggot I have the displeasure of training to be a useful Shadowknight of the Lodge of the Dead. First you must get yourself outfitted in a suit of [armor]. those rags you wear can not even contain the stench of your miserable hide and will do no good protecting it from the edge of an enemy's blade.");
 		elseif(e.message:findi("armor")) then
@@ -21,11 +21,10 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 19574,item2 = 16197,item3 = 19554})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 19574,item2 = 16197,item3 = 19554})) then
 		e.self:Say("Well, you're not completely useless, afterall. Take this sword and sharpen it. Then, return it to me.");
 		e.other:QuestReward(e.self,0,0,0,0,19572);
-	elseif(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 19573})) then
+	elseif(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 19573})) then
 		e.self:Say("I'm surprised, I really am. I didn't think somebody like you could pull it off. Here, take this before I change my mind.");
 		e.other:Faction(e.self,239,15); --The Dead
 		e.other:Faction(e.self,303,2); --Queen Cristanos Thex
@@ -34,7 +33,7 @@ function event_trade(e)
 		e.other:Faction(e.self,245,-2); --Eldritch Collective
 		e.other:Faction(e.self,1522,-30); --Primordial Malice
 		e.other:QuestReward(e.self,0,0,0,0,19607,1000);
-	elseif(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 19570,item2 = 19570,item3 = 19570,item4 = 19570})) then
+	elseif(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 19570,item2 = 19570,item3 = 19570,item4 = 19570})) then
 		e.self:Emote("fashions the petrified femurs into a shield frame. This will be the frame of your new shield. Return now again to the Nektulos Forest, in the gray ashen region of the forest near the Lavastorm mountains the basilisks often come down from the fiery peaks to lay their eggs in the ashen soil. Basilisk hatchlings can be found there as they make their way towards the warmer interior of the mountains. Hunt these basilisk hatchlings and gather two Basilisk Hatchling Skins. Once this is done take the skins and frame to Medron Y'Lask at the Furrier Royale.");
 		e.other:Faction(e.self,239,15); --The Dead
 		e.other:Faction(e.self,303,2); --Queen Cristanos Thex

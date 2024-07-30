@@ -18,7 +18,6 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
 	
 	if(item_lib.check_turn_in(e.self, e.trade, {item1 = 18857})) then -- A tattered note
 		e.self:Say("Hahaha.. I sure hope you prove more valuable than you look, little one.");

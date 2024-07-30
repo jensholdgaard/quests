@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("You do not yet bear the sweet aroma of death and decay that the Plague Bringer bestows upon his most faithful servants. What is it that you seek from Wellis?");
 		elseif(e.message:findi("gauntlet")) then
@@ -29,11 +29,11 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 20206})) then
+	
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 20206})) then
 		e.self:Say("Welcome to the Bloodsabers young Scourge Knight. I will help prepare you for your spreading of the disease. You must use this Mail Assembly Kit to construct the pieces of your armor. Each piece will require different materials for its construction. Will you craft [Gauntlets of the Scourge Knight], [Boots of the Scourge Knight], a [Bracer of the Scourge Knight], a [Helm of the Scourge Knight], [Greaves of the Scourge Knight], [Vambraces of the Scourge Knight], or a [Breastplate of the Scourge Knight]?");
 		e.other:QuestReward(e.self,0,0,0,0,17124);
-	elseif(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 20188, item2 = 19946})) then
+	elseif(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 20188, item2 = 19946})) then
 		e.self:Emote("Wellis Pestule fashions a grip out of the giant king snake skin, sharpens the edge of the blade to be razor sharp, and polishes the weapon with a strange blood like substance.");
 		e.self:Say("A fine weapon for a Knight of the Bloodsabers. Go now and spread the Disease!");
 		e.other:QuestReward(e.self,0,0,0,0,20260);

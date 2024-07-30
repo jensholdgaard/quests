@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("Hail")) then
 			e.self:Say("Who dares to address me while I am clearly busy reviewing my daily research. I sure hope this is important " .. e.other:GetCleanName() .. ", I do not have time to waste on just any initate of House Spurned. Not a single day goes by that I do not come face to face with cannon fodder that is not even worthy of a headstone in our burial grounds. If you wish to [prove yourself] then I might be in a generous mood.");
 		elseif(e.message:findi("prove myself")) then
@@ -44,8 +44,7 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 22642, item2 = 22643, item3 = 22644})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 22642, item2 = 22643, item3 = 22644})) then
 		e.self:Say("Your prowess both in the classroom and on the battlefield has certainly amazed me. Please take this relic that is only presented to the most dedicated initiates and carry it with pride. You have made your house very proud on this day.");
 		e.other:QuestReward(e.self,0,0,0,0,22647); --Ceremonial Dagger of the Spurned
 	end

@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Greetings " .. e.other:GetCleanName() .. "! I am Megosh Thistlethorn first Ranger of the Storm Reapers of Rivervale. I journeyed many years ago to the Surefall Glade far to the west of our lovely shire. It was there I trained with the human and half-elven rangers that like the Storm Reapers are faithful disciples of Karana. I have returned now to Rivervale to teach our interested young people the ways of a ranger of the Storm Lord, so that we may defend our shire and the wilds of Norrath from the [evil forces] that would see it destroyed.");
 		elseif(e.message:findi("evil forces")) then  
@@ -25,7 +25,7 @@ function event_trade(e)
 		e.other:Faction(e.self,292,15,0); -- +Merchants of Rivervale
 		e.other:Faction(e.self,324,-15,0); -- -Unkempt Druids
 		e.other:QuestReward(e.self,0,0,0,0,13541,100); -- Jumjum Sack Tunic*
-	elseif(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 19622,item2 = 19622,item3 = 19623,item4 = 19623})) then -- Handin 2 Orc LumberJack Axes and 2 Orc LumberJack Machetes
+	elseif(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 19622,item2 = 19622,item3 = 19623,item4 = 19623})) then -- Handin 2 Orc LumberJack Axes and 2 Orc LumberJack Machetes
 		e.self:Say("Excellent work young Storm Reaper " .. e.other:GetCleanName() .. ". Now take this Dull Storm Reaper Machete to a [forge] and sharpen it with a sharpening stone. It may take several attempts to get the blade to an adequate sharpness if you are unfamiliar with the process. Once it is sharpened give it to Bodbin Gimple with a ruined thorn drakeling scales and he will put the finishing touches on what will be a fine weapon!");
 		e.other:Faction(e.self,355,5,0); -- Faction: Storm Reapers
 		e.other:Faction(e.self,286,1,0); -- Faction: Mayor Gubbin

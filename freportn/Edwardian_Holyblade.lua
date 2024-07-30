@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Greetings and well met " .. e.other:GetCleanName() .. ". I am Edwardian Holyblade, noble paladin of Marr. I have devoted my life and my blade to the glory of Mithaniel Marr. I am also in charge of training all new paladins of Marr to make sure that they have the best training necessary. If you are a paladin of Marr I may have some [training] for you.");
 		elseif(e.message:findi("training")) then
@@ -38,9 +38,8 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
 	
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 9927,item2 = 9928,item3 = 9929,item4 = 9930})) then  -- Fefslans Bracer, Gnoosals Bracer, Walorinags Bracer, Eridals Bracer
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 9927,item2 = 9928,item3 = 9929,item4 = 9930})) then  -- Fefslans Bracer, Gnoosals Bracer, Walorinags Bracer, Eridals Bracer
 		e.self:Say("Your dedication to the Temple of Marr is unquestioned " .. e.other:GetCleanName() .. ".You have made your house very proud. May this blade bring you the best of luck and good fortune wherever your adventures may take you.");
 		e.other:Faction(e.self,281,25,0); -- Faction: Knights of Truth
 		e.other:Faction(e.self,271,-3,0); -- Faction: Dismal Rage

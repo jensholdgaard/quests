@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Gud to meet ye there " .. e.other:GetCleanName() .. ". Me names Crovsar Dirkbringer and I run dis here mining operation. Anyone else that tell ye different simply aint telling da truth! I like to spend most of me time minin but I also like to help our young miners pick dere way to glory as a great rogue! Er I mean a great miner! Aye, dats it. If ye are a young minin [rogue] of Kaladim den I might just have some things for ye to do.");
 		elseif(e.message:findi("rogue")) then
@@ -47,9 +47,8 @@ function event_say(e)
 end
 
 function event_trade(e)
-	local expansion_flag = eq.get_current_expansion();
 	local item_lib = require("items");
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 28067, item2 = 28068, item3 = 28068})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 28067, item2 = 28068, item3 = 28068})) then
 		e.self:Say("Ah thank ye " .. e.other:GetCleanName() .. ". Here is yer minin pick.");
 		--Summon: Sharpened Mining Pick
 		e.other:QuestReward(e.self,0,0,0,0,26078); -- Item: Sharpened Mining Pick

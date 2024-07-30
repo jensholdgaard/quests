@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Oi there! Its nice to meet you. You must excuse me for I am currently working on a special spell for my studies. I would love to talk but I have to teach a class very soon to the new [initiates] and I don't have my lesson prepared yet. Are you also a [young initiate of the Eldritch Collective]? If you are then I hope you will be ready for the lesson.");
 		elseif(e.message:findi("initiate")) then
@@ -40,7 +40,7 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(item_lib.check_turn_in(e.self, e.trade, {item1 = 9116, item2 = 9117, item3 = 9118, item4 = 9119})) then
 			e.self:Say("I knew you could do it! You have proven yourself worthy of your god and of your Guild! All the highest ranking officials of the Collective will surely hear of your good deeds. Upon studying these pages a bit further it seems it forms a book of incantations that will aid you in furthering your studies. Please take this magical book for I have learned all I can from it. Good luck!");
 			e.other:Faction(e.self,245,10,0); -- Faction: Eldritch Collective

@@ -1,7 +1,7 @@
 -- Converted to .lua by Speedz
 
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Hail " .. e.other:GetCleanName() .. "!");
 		elseif(e.message:findi("silk thread")) then
@@ -32,9 +32,8 @@ function event_say(e)
 end
 
 function event_trade(e)
-	local expansion_flag = eq.get_current_expansion();
 	local item_lib = require("items");
-	if (expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 10988})) then
+	if (eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 10988})) then
 		e.self:Say("Hail " .. e.other:GetCleanName() .. "! You must be one of Kaxon's new trainees. Kaxon has asked me to help get you outfitted in a suit of armor to protect you from the weapons of our foes. I have assembled a kit for you that will allow you to construct the armor pieces once you have gathered the necessary components. The required components vary according to which piece of Plague Rust Mail you are planning on assembling. Do you wish to craft a [plague rust coif], a [plague rust bracer], [plague rust gloves], [plague rust boots], [plague rust sleeves], [plague rust leggings], or a [plague rust tunic].");
 		e.other:QuestReward(e.self,0,0,0,0,17124); -- Item: Mail Assembly Kit
 	end

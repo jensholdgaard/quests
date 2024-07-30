@@ -1,5 +1,5 @@
 function event_say(e) 
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Zonkers! You scared me! Well it is good to meet you nonetheless young " .. e.other:GetCleanName() .. ". Many young Guardians of the Vale often come to me for guidance. If there is something I can help you with in your training you make sure you let Dalorio know! In the meanwhile I will be working on my [trade].");
 		elseif(e.message:findi("trade")) then
@@ -42,8 +42,8 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
-	if (expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 22940, item2 = 22941, item3 = 22942, item4 = 22943})) then
+
+	if (eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 22940, item2 = 22941, item3 = 22942, item4 = 22943})) then
   		e.self:Say("Your good deeds shall be echoed in the Rivervale Hall of Heroes for many years to come. With these documents I will be able to have my army prepared for whatever they decide to come at us with. I thank you, young Warhumago. Please take this sword as a symbol of your loyalty to the Vale.");
 		e.other:Faction(e.self,263,10); -- Guardian of the Vale
 		e.other:Faction(e.self,286,1); -- Mayor Gubbin

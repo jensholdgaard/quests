@@ -1,7 +1,7 @@
 -- Bertoxxulous cleric quest armor
 
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("The dead are watching you young one, yet you are safe under their otherworldly gaze. Is there something I can do for you?");
 		elseif(e.message:findi("gauntlet")) then
@@ -31,12 +31,11 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
 		
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 20207})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 20207})) then
 		e.self:Say("Well met young disciple of Bertoxxulous. Perhaps one day you shall serve the Plague Lord in his realm, but for now you will serve the Bloodsabers, his mortal agents on Norrath. The armor you seek must be assembled using this Mail Assembly Kit. The materials necessary to construct the armor vary depending on the piece being crafted. Do you wish to craft [Gauntlets] of the Pestilence Priests, [Boots] of the Pestilence Priests, a [Bracer] of the Pestilence Priests, a [Helm] of the Pestilence Priests, [Greaves] of the Pestilence Priests, [Vambraces] of the Pestilence Priests, or a [Breastplate] of the Pestilence Priests?");
 		e.other:QuestReward(e.self,0,0,0,0,17124);
-	elseif(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 20199, item2 = 19946})) then
+	elseif(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 20199, item2 = 19946})) then
 		e.self:Emote("fashions a grip from the giant king snake skin and polishes the mace with a strange dark substance. 'Wield it with pride young priest, may you spread the disease!");
 		e.other:Faction(e.self,221,5); -- Faction: Bloodsabers
 		e.other:Faction(e.self,262,-1); -- Faction: Guards of Qeynos

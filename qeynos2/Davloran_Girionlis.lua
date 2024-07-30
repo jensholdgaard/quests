@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Good day " .. e.other:GetCleanName() .. ". I am Davloran Girionlis Holy Knight in service to the Prime Healer Rodcet Nife. I pride myself on being responsible for ridding my homeland of unimaginable evil during my fighting days. Nowadays I just like to train new Temple of Life paladin [recruits].");
 		elseif(e.message:findi("recruit")) then
@@ -40,8 +40,8 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 27399,item2 = 27399,item3 = 27417,item4 = 27417})) then
+
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 27399,item2 = 27399,item3 = 27417,item4 = 27417})) then
 		e.self:Say("These are exactly what I needed! Its for sure that I have a lot to learn about Smithing but low and behold I was able to create this fine blade out of my remaining materials. Please carry it with you as a symbol of my gratitude. Rodcet smiles down upon you young " .. e.other:GetCleanName() .. ", you have done well.");
 		-- Confirmed Live Experience and Faction
 		e.other:Faction(e.self,280,10); -- Faction: Knights of Thunder

@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("On what grounds do you think you are welcome to address me like that vermin? I am afraid you will have to prove yourself to me before I can treat you with any respect. Do you feel that you are [worthy] to stand before me?");
 		elseif(e.message:findi("worthy")) then

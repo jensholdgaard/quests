@@ -1,7 +1,7 @@
 --Selzar L'Crit, Neriakc 42085
 
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("What have we here? Another hopeful member of the House of the Ebon Mask? You've got much to learn before you will be of much use to our House or the secret operations that support both the thrones of our King and Queen. First you need to outfit yourself in a suit of [armor], " .. e.other:GetCleanName() .. ".");
 		elseif(e.message:findi("armor")) then
@@ -19,8 +19,7 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 19578, item2 = 19577, item3 = 13060})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 19578, item2 = 19577, item3 = 13060})) then
 		e.self:Say("You have slain enemies of our order. Carry your weapon with pride.");
 		e.other:QuestReward(e.self,0,0,0,0,19608,150);
 	end

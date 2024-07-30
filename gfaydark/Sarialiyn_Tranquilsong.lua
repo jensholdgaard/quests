@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Pleased to meet you " .. e.other:GetCleanName() .. ". I am Sarialiyn Tranquilsong. Virtuoso of the Songweavers Kelethin division. I have spent all of my years here in Kelethin training our new recruits to ensure that all are ready to defend themselves once their adventures take them away from the Faydark and beyond. If you are a [young bard of Kelethin] then I might have some exercises for you to complete.");
 		elseif(e.message:findi("bard of kelethin")) then
@@ -40,9 +40,8 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
 		
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 22694,item2 = 22694,item3 = 27540})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 22694,item2 = 22694,item3 = 27540})) then
 		e.self:Say("I never though I would see my lute again. I owe you my sincere thanks " .. e.other:GetCleanName() .. ". Please take this weapon that I carried for most of my days as a symbol of my gratitude. May it guide you to victory in all of your battles.");
 		e.other:QuestReward(e.self,0,0,0,0,27533,500);
 	end

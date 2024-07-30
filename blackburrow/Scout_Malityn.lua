@@ -1,8 +1,7 @@
 function event_trade(e)
-	local expansion_flag = eq.get_current_expansion();
 	local item_lib = require("items");
 	
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 27498}, 0)) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 27498}, 0)) then
 		e.self:Say("Oh my I am very thankful for these rations. I have been very hungry. Please send our teacher my regards and this report. Good luck!");
 		-- Confirmed Live Factions and Experience
 		e.other:Faction(e.self,341,10); -- Priest of Life

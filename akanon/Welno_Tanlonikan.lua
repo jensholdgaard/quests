@@ -1,8 +1,7 @@
 -- Converted to .lua by Speedz
 
 function event_say(e)
-	local expansion_flag = eq.get_current_expansion();
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Greetings there " .. e.other:GetCleanName() .. "! I am Welno Tanlonikan Assassin of Akanon. I pride myself on being one of the few to train our younger prospects in the ways of the rogue. If you are a young gnome rogue in training then I might have some [tasks] for you.");
 		elseif(e.message:findi("tasks")) then
@@ -44,7 +43,6 @@ function event_say(e)
 end
 
 function event_trade(e)
-	local expansion_flag = eq.get_current_expansion();
 	local item_lib = require("items");
 	if(item_lib.check_turn_in(e.self, e.trade, {item1 = 18776})) then -- Note
 		e.self:Say("Yes, I just knew you'd see it my way, " .. e.other:GetCleanName() .. ". Anyway, welcome to our little part of Ak'Anon's underworld. We have to pay a high price to keep our small orgainzation hidden, which keeps us all busy around here. Now throw this on, and let's put you to work.");
@@ -53,7 +51,7 @@ function event_trade(e)
 		e.other:Faction(e.self,255,15); 	-- Gem Choppers
 		e.other:Faction(e.self,238,-15); 	-- Dark Reflection
 		e.other:QuestReward(e.self,0,0,0,0,13519,20);	-- Scuffed Tunic*
-	elseif(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 9108,item2 = 9108, item3 = 9109, item4 = 9109})) then -- Minotaur Scalp x 2, Mountain Lion Jawbone x 2
+	elseif(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 9108,item2 = 9108, item3 = 9109, item4 = 9109})) then -- Minotaur Scalp x 2, Mountain Lion Jawbone x 2
 		e.self:Say("Here is that dagger I promised you " .. e.other:GetCleanName() .. "!");
 		e.other:QuestReward(e.self,0,0,0,0,9110); 	-- Gemmed Shadowwalkers Dagger
 	end

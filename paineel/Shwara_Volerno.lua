@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("Hail")) then
 			e.self:Say("Welcome to The Abattoir fellow Cazicite. I am Shwara Volerno. Mistress of Necromancy. If you have just begun to study the Necromantic arts I will assist you with obtaining some [clothing] and a robe that will be most useful when conducting research outside of The Abattoirs walls. We members of the Abattoir are the most feared of the residents of Paineel by the citizens of Erudin. to venture too far beyond the safety of our city unprepared would be foolish.");
 		elseif(e.message:findi("clothing")) then
@@ -37,7 +37,7 @@ end
 function event_trade(e)
 	local item_lib = require("items");
 	local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 20420})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 20420})) then
 		e.self:Say("Well done " .. e.other:GetCleanName() .. ".These parchments will be inspected immediately by some of The Abattoirs most experienced translators and researchers. Take this Rough Abattoir initiate Staff then go forth an obtain a Giant Briar Snake Skin and a Petrified Eyeball. Once you have done so bring me those items and the rough abattoir initiate staff and I will put the final touches on what will be your new instrument of power.");
 		e.other:Faction(e.self,265, 1); -- Faction: Heretics
 		e.other:Faction(e.self,242, -1); -- Faction: Deepwater Knights
@@ -45,7 +45,7 @@ function event_trade(e)
 		e.other:Faction(e.self,231, -1); -- Faction: Craftkeepers
 		e.other:Faction(e.self,233, -1); -- Faction: Crimson Hands
 		e.other:QuestReward(e.self,0,0,0,0,20358);
-	elseif(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 20358, item2 = 20356, item3 = 20402})) then
+	elseif(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 20358, item2 = 20356, item3 = 20402})) then
 		e.self:Emote("fashions a grip out of the Giant Briar Snake Skin, fastens the Petrified Eyeball to a steel mount on one end of the staff, and tarnishes the wood of the staff with a shimmering black substance. 'Here is your new Abattoirs Initiate Staff, " .. e.other:GetCleanName() .. ". May it serve you well in your pursuit for power.'");
 		e.other:Faction(e.self,265, 1); -- Faction: Heretics
 		e.other:Faction(e.self,242, -1); -- Faction: Deepwater Knights

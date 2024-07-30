@@ -42,7 +42,6 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
 	
 	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 20288,item2 = 20289})) then
 		e.self:Say("Good work " .. e.other:GetCleanName() .. ".  King Tearis Thex and the Royal Order of the Koada'Vie shall be pleased.  Take the Dull Felwithe Defenders Sword to a forge and sharpen it with a sharpening stone.  It may take you several attempts if you are unfamiliar with the process.  Once that is accomplished bring me the Sharp Felwithe Defenders Sword, a Pristine Forest Drakeling Scale, and an Arborean Amber and I will put the finishing touches on the weapon.");
@@ -50,7 +49,7 @@ function event_trade(e)
 		e.other:Faction(e.self,279,10,0); -- King Tearis Thex
 		e.other:Faction(e.self,5002,7,0); -- Anti-Mage
 		e.other:QuestReward(e.self,0,0,0,0,20295,1000); -- Item: Dull Felwithe Defenders Sword
-	elseif(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 20299,item2 = 20271,item3 = 20274})) then
+	elseif(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 20299,item2 = 20271,item3 = 20274})) then
 		e.self:Emote("fashions a grip from the pristine forest drakeling scales, fastens the arborean amber to the pommel of the hilt and polishes the blade of the sword with a luminescent substance. 'Here is your new weapon young defender. May it serve you well in your service to the Koada'Vie.'");
 		e.other:Faction(e.self,226,5,0); -- Clerics of Tunare
 		e.other:Faction(e.self,279,5,0); -- King Tearis Thex

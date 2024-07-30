@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("A healthy young " .. e.other:Race() .. " you appear to be. The Plague Bringer has not yet blessed you with his greatest of gifts. What can I do for you young one?");
 		elseif(e.message:findi("gauntlet")) then
@@ -29,11 +29,10 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-		local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 20205})) then
+	if(eq.is_the_shadows_of_luclin_enabled()and item_lib.check_turn_in(e.self, e.trade, {item1 = 20205})) then
 		e.self:Say("Ah, so you are in need of a suit of armor fitting a young scourge warrior of the Bloodsabers. I will assist you. You will use this Mail Assembly Kit to construct the pieces of armor. Each piece will require different materials for its proper construction. Do you seek to assemble [Gauntlets of the Scourge Warrior], [Boots of the Scourge Warrior], a [Bracer of the Scourge Warrior], a [Helm of the Scourge Warrior], [Greaves of the Scourge Warrior], [Vambraces of the Scourge Warrior], or a [Breastplate of the Scourge Warrior]?");
 		e.other:QuestReward(e.self,0,0,0,0,17124);
-	elseif(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 20177, item2 = 19946})) then
+	elseif(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 20177, item2 = 19946})) then
 		e.self:Say("Excellent work. Use this sword to further our mission.");
 		e.other:QuestReward(e.self,0,0,0,0,20262,500);
 	end

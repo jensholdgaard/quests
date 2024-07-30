@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Lo dere " .. e.other:GetCleanName() .. "! I be Brenthalion Aleslammer Holy Defender of Brell! I can see that ye found my temple of Brell that I have resided over for many years. I have been appointed by da King Kazon himself to make sure dat all our young paladins get da [training] dey need before dey go out to explore da world. Aye.");
 		elseif(e.message:findi("training")) then
@@ -39,9 +39,8 @@ function event_say(e)
 end
 
 function event_trade(e)
-	local expansion_flag = eq.get_current_expansion();
 	local item_lib = require("items");
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 2396, item2 = 28065, item3 = 28066})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 2396, item2 = 28065, item3 = 28066})) then
 		e.self:Say("Dese will surely be a great addition to me trophy room " .. e.other:GetCleanName() .. "! I knew I could count on you to not have a problem collecting these things for me. As I promised, I have prepared you a fine blade that will surely guide you to victory wherever your travels may take you. Gud luck to ye " .. e.other:GetCleanName() .. ", hammers high!");
 		e.other:Faction(e.self,227,20); -- Faction: Clerics of Underfoot
 		e.other:Faction(e.self,274,20); -- Faction: Kazon Stormhammer
