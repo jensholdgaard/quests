@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Greetings to you " .. e.other:GetCleanName() .. ". I am Sten Harnak Virtuoso of Freeport. I have lived in Freeport and studied the art of songweaving here for all of my days. I am always eager to see new faces here in our concert hall. If you are here for a performance I am afraid it does not start till a bit later but if you are a young bard in training then I might have some [work] for you.");
 		elseif(e.message:findi("what work")) then
@@ -35,6 +35,10 @@ function event_say(e)
 		elseif(e.message:findi("collect some warbead")) then
 			e.self:Say("I am very pleased to hear that you will be able to help us. The warbeads that I require will be found on specific Orc Chieftans. I am sure they are not alone and are well guarded so make sure you bring companions with you that are well proven on the battlefield. Bring me the warbeads of Chief Fosloas, Diedridan and Kelleru. I look forward to seeing you soon.");
 		end
+	else
+		if(e.message:findi("hail")) then
+			e.self:Say("Greetings to you " .. e.other:GetCleanName() .. ". I am Sten Harnak Virtuoso of Freeport. I have lived in Freeport and studied the art of songweaving here for all of my days. I am always eager to see new faces here in our concert hall."); -- made up text
+		end
 	end
 end
 
@@ -42,7 +46,7 @@ function event_trade(e)
 	local item_lib = require("items");
 	local expansion_flag = eq.get_current_expansion();
 
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 9924,item2 = 9925,item3 = 9926})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 9924,item2 = 9925,item3 = 9926})) then
 		e.self:Say("I knew I could count on you " .. e.other:GetCleanName() .. "! The defeat of these high ranking orcs will definitely be a positive turn in our constant battle of ridding the commons of these vile creatures. For your dedication to the Choir of Lore I would like to present you with this blade. May it keep you safe and serve you well wherever your journeys may take you.");
 		e.other:Faction(e.self,284,25); -- league of antonican bards
 		e.other:Faction(e.self,281,3); -- knights of truth

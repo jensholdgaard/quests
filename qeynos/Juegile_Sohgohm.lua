@@ -1,7 +1,7 @@
 -- Arcane Order armor quests
 
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Why hello there " .. e.other:GetCleanName() .. "! Its not often that I get many visitors to our sacred hall here. I am Juegile Sohgohm, Master Elementalist of the Order of Three. I have studied in these hallowed halls for all of my days. In my spare time I also pride myself as being a mentor for all of our new apprentices. If you are a young [Magician, Wizard or Enchanter] and you hail from the Order of Three house I might have some work for you.");
 		elseif(e.message:findi("young magician")) then
@@ -39,13 +39,17 @@ function event_say(e)
 		elseif(e.message:findi("task")) then
 			e.self:Say("I have heard word that there are numerous gnolls in the hills terrorizing a good friend of mine Rephas. I need you to go to the hills and assist my friend Rephas. Rephas had 3 pages of research he was studying and they were stolen by these gnolls. I need you to retrieve these pages and bring them to Rephas. He will then give you a completed book to return to me. Bring me back the completed book from Rephas and I will surely reward you for your efforts.");
 		end
+	else
+		if(e.message:findi("hail")) then
+			e.self:Say("Why hello there " .. e.other:GetCleanName() .. "! Its not often that I get many visitors to our sacred hall here. I am Juegile Sohgohm, Master Elementalist of the Order of Three. I have studied in these hallowed halls for all of my days. In my spare time I also pride myself as being a mentor for all of our new apprentices."); -- made up text
+		end
 	end
 end
 
 function event_trade(e)
 	local item_lib = require("items");
 	local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 27431})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 27431})) then
 		e.self:Say("I knew I could rely on Rephas to finish this research for me. We both know that this would not have been possible without your help young " .. e.other:GetCleanName() .. " . Please take this dagger as a symbol of your dedication to the Order of Three. Your good deeds will surely be known throughout our guildhouse. Good luck to you!");
 		-- Confirmed Live Experience and Faction
 		e.other:Faction(e.self,342,10); -- Faction: Order of Three

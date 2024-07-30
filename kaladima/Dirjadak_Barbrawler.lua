@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Hail to ye too " .. e.other:GetCleanName() .. ", what brings ye to Kaladim`s hall of champions? I am Dirjadak Barbrawler and its gud to meet ye. I pride myself on being one of the finest Warlords to have ever served in Brells Army. However, my days nowadays aren't all that exciting. I just spend me time training young ones that are born into the life of a Kaladim Champion. If you are a young [warrior] of Brell I might have some work for you.");
 		elseif(e.message:findi("warrior")) then
@@ -47,8 +47,14 @@ end
 function event_trade(e)
 	local expansion_flag = eq.get_current_expansion();
 	local item_lib = require("items");
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 28064, item2 = 28064, item3 = 28063})) then
-		e.self:Say("Here is that blade I promised you " .. e.other:GetCleanName() .. ".");
+	
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 28064, item2 = 28064, item3 = 28063})) then
+		e.self:Say("I surely knew when I saw ye that ye would grow into a fine warrior of Brell and make me very proud! Well ye have done that indeed and I cannot tell ye how happy I am to have me stein back. Please take this Gem-Etched Battle Axe and may it guard you well in all of yer adventures to come. You have done well . Aye.");
+		e.other:Faction(e.self,312,20); -- Storm Guard
+		e.other:Faction(e.self,274,3); -- Kazon Stormhammer
+		e.other:Faction(e.self,293,3); -- Miners Guild 249
+		e.other:Faction(e.self,290,5); -- Merchants of Kaladim
+		e.other:Faction(e.self,232,-5); -- Craknek Warriors
 		-- Summon: Gem-Etched Battle Axe
 		e.other:QuestReward(e.self,{itemid = 26076}); -- Item: Gem-Etched Battle Axe
 	end

@@ -1,9 +1,9 @@
 -- leafrunners quest 
 
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
-			e.self:Say("Pleased to meet you, " .. e.other:GetCleanName() .. ", I am Aliafya Mistrunner Preserver of Nature and loyal servant of Tunare. I have resided in this guild house for many of my years. I pride myself on being a mentor to many young druids of Tunare that come up through our ranks. If you are a [druid of Tunare] then I might have some work for you.");
+			e.self:Say("Pleased to meet you, " .. e.other:GetCleanName() .. ". I am Aliafya Mistrunner Preserver of Nature and loyal servant of Tunare. I have resided in this guild house for many of my years. I pride myself on being a mentor to many young druids of Tunare that come up through our ranks. If you are a [druid of Tunare] then I might have some work for you.");
 		elseif(e.message:findi("druid of Tunare")) then
 			e.self:Say("I am always pleased to see new faces amongst us indeed " .. e.other:GetCleanName() .. ". However, I must learn if you are loyal to your house and your god by asking you to complete a series of training exercises. These tests will enable you to learn your way around this great land we call home and to pick up some very valuable hunting skills that will aid you in all of your battles to come. When you are [ready to begin your training] I will present you with your Leafrunners Assembly Kit.");
 		elseif(e.message:findi("ready to begin")) then
@@ -40,8 +40,8 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 27537,item2 = 27537,item3 = 27538})) then
+	
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 27537,item2 = 27537,item3 = 27538})) then
 		e.self:Say("There was no doubt in my mind that you could be counted on for this important mission. I will see that our tacticians get these battle plans so that they can be studied at once. Please take this Scimitar as a symbol of your dedication to your house and your god. You have done well, young Kiliak, may Tunare guide you always.");
 		e.other:Faction(e.self,310,5); -- soldier of Tunare
 		e.other:Faction(e.self,279,1); -- King Tearis Thex

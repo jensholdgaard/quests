@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Pleased to meet you " .. e.other:GetCleanName() .. ". I am Vansted Rohenga High Priest of Karana. I have spent all of my years studying the ways of the Cleric in our wonderful Temple of Thunder. We receive many new recruits every day and it is my duty to place them in my [training program].");
 		elseif(e.message:findi("training program")) then
@@ -35,15 +35,18 @@ function event_say(e)
 		elseif(e.message:findi("important document")) then
 			e.self:Say("There is a believed to be a gnoll tactician somewhere in the gnoll camp of Blackburrow. I need you to bring whatever battle plans he may be in possession of so that I can position my troops accordingly. Return to me with whatever battle plans you can find along with 2 Gnoll Backbones and I will surely reward you for your dedication.");
 		end
+	else
+		if(e.message:findi("hail")) then
+			e.self:Say("Pleased to meet you " .. e.other:GetCleanName() .. ". I am Vansted Rohenga High Priest of Karana. I have spent all of my years studying the ways of the Cleric in our wonderful Temple of Thunder. We receive many new recruits every day and it is my duty to train them."); -- made up text
+		end
 	end
-	
 end
 
 function event_trade(e)
 
 	local item_lib = require("items");
 	local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 27416,item2 = 27405,item3 = 27405})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 27416,item2 = 27405,item3 = 27405})) then
 		e.self:Say("These are exactly what I was looking for " .. e.other:GetCleanName() .. "! I am very proud to have one as noble as yourself amongst our ranks! Please take this mace as a token of my appreciation. I bid you farewell, and safe travels.");
 		-- Confirmed Live Experience and Faction
 		e.other:Faction(e.self,280,10,0); -- Faction: Knights of Thunder

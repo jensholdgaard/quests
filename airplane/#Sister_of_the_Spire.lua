@@ -3,7 +3,7 @@ function event_death_complete(e)
 	sirranName = sirranName .. eq.get_zone_guild_id();
 	if(eq.get_entity_list():IsMobSpawnedByNpcTypeID(71058) == false) then
 		eq.set_global(sirranName,"7",3,"M20");
-		eq.unique_spawn(71058,0,0,-960,-1037,1093,64); -- NPC: Sirran_the_Lunatic
+		eq.unique_spawn(71058,0,0,e.self:GetX(), e.self:GetY(), e.self:GetZ(), e.self:GetHeading()); -- NPC: Sirran_the_Lunatic
 	end
 end
 

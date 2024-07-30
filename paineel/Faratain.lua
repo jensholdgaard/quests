@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Salutations " .. e.other:GetCleanName() .. ". If you are here to make use of the forges then feel free to pursue your crafts within this chamber. If you are a new Fell Blade in need of a suit of armor and weapon then I will assist you in crafting [armaments] fitting of a young Shadow Knight.");
 		elseif(e.message:findi("armament")) then
@@ -29,6 +29,10 @@ function event_say(e)
 			e.self:Say("To assemble Fell blade Vambraces you will need to obtain two bricks of crude bronze and smelt them in a forge with a Water Flask and this Crude Vambrace Mold. Once that is done combine the Crude Bronze Vambraces with an Intact Kobold Pelt and two Calcified Humerus Bones in the Mail Assembly Kit.");
 			e.other:SummonCursorItem(19635); -- Item: Crude Vambrace Mold
 		end
+	else
+		if(e.message:findi("hail")) then
+			e.self:Say("Salutations " .. e.other:GetCleanName() .. ". If you are here to make use of the forges then feel free to pursue your crafts within this chamber.");	--made up text
+		end
 	end
 end
 
@@ -36,7 +40,7 @@ function event_trade(e)
 	local item_lib = require("items");
 	local expansion_flag = eq.get_current_expansion();
 
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 20421})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 20421})) then
 		e.self:Say("Well done " .. e.other:GetCleanName() .. ". I will have this translated immediately so that it may be studied. Take this Dull Fell Blade Cutlass and sharpen it in a forge with a sharpening stone. It may take you several attempts if you are unfamiliar with the process. Once that is done bring me the Sharp Fell Blade Cutlass, a Large Briar Snake Skin, and a Petrified Eyeball and I will put the finishing touches on the weapon.");
 		e.other:Faction(e.self,265,5);  -- +Heretics
 		e.other:Faction(e.self,242,-5);  -- -Deepwater Knights
@@ -44,7 +48,7 @@ function event_trade(e)
 		e.other:Faction(e.self,231,-5);  -- -Craftkeepers
 		e.other:Faction(e.self,233,-5);  -- -Crimson Hands
 		e.other:QuestReward(e.self,0,0,0,0,20403);
-	elseif(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 20404, item2 = 20355, item3 = 20402})) then
+	elseif(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 20404, item2 = 20355, item3 = 20402})) then
 		e.self:Emote("Faratain fashions a grip from the large briar snake skin, fastens the petrified eyeball to the pommel of the hilt, and polishes the blade with a shimmering black substance. I present you with your Fell Blade Cutlass. May it serve you well in the name of Cazic Thule.");
 		e.other:QuestReward(e.self,0,0,0,0,20416);
 	end

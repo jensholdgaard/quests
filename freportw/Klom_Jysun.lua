@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Pleasure to meet you "..e.other:GetName()..". I am Klom Jysun, Grandmaster of the Ashen Order. I have lived in the great city of Freeport for quite sometime now and have watched the city evolve and change. Nowadays though I am in charge of training new members of the Ashen Fist. If you are a young monk and are in need of some armor I might have some work for you. Are you a [monk]?");
 		elseif(e.message:findi("monk")) then
@@ -33,6 +33,10 @@ function event_say(e)
 		elseif(e.message:findi("favor")) then
 			e.self:Say("I had a student not too long ago that trained with me for quite sometime. He showed a lot of promise on his way to becoming a Grandmaster, however one day he came to tell me that he intended on joining the militia. I told him that I did not feel that was what he wanted to do but he insisted. On the day that he left he stole a headband from me that I was presented with by the Hall of Truth. This headband meant a lot to me, if you were able to find Firansad I am sure he will have it. Return it to me with two Orc Toes and I will surely reward you for your trouble.");
 		end
+	else
+		if(e.message:findi("hail")) then
+			e.self:Say("Pleasure to meet you "..e.other:GetName()..". I am Klom Jysun, Grandmaster of the Ashen Order. I have lived in the great city of Freeport for quite sometime now and have watched the city evolve and change. Nowadays though I am in charge of training new members of the Ashen Fist.");	-- Text made up
+		end
 	end
 end
 
@@ -40,7 +44,7 @@ function event_trade(e)
 	local item_lib = require("items");
 	local expansion_flag = eq.get_current_expansion();
 	
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 9934,item2 = 9920,item3 = 9920})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 9934,item2 = 9920,item3 = 9920})) then
 		e.self:Say("Your dedication to the Ashen Fist is unquestioned. I can see this by your willingness to assist me in whatever task I assigned you. I would like you to take this as a symbol of my gratitude.");
 		e.other:Faction(e.self,361,25); -- Ashen Order
 		e.other:Faction(e.self,281,3); -- Knights of Truth

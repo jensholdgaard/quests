@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Welcome friend! Have you come to the Temple of Tunare to give praise or are you a young Cleric seeking [guidance] from your elders?");
 		elseif(e.message:findi("further guidance")) then
@@ -33,6 +33,10 @@ function event_say(e)
 			e.self:Say("To assemble a sylvan initiate breastplate you will need to obtain four bricks of crude bronze and smelt them in a forge with a Water Flask and this Crude Breastplate Mold. Once that is done, combine the Crude Bronze Breastplate with a Giant Sylvan Bat Fur, and two Mature Arborean Barks in the Mail Assembly Kit.");
 			e.other:SummonCursorItem(19637); -- Item: Crude Breastplate Mold
 		end
+	else
+		if(e.message:findi("hail")) then
+			e.self:Say("Welcome friend! Have you come to the Temple of Tunare to give praise?"); -- text made up
+		end
 	end
 end
 
@@ -40,7 +44,7 @@ function event_trade(e)
 	local item_lib = require("items");
 	local expansion_flag = eq.get_current_expansion();
 	
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 20280})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 20280})) then
 		e.self:Say("You have done well young " .. e.other:GetCleanName() .. ". If you continue to show such devotion to your people and your faith then perhaps one day you will serve in the chambers of King Tearis Thex himself. Take this Rusty Sylvan Morning Star and scrape the rust from it in a forge with a sharpening stone. It may take several attempts if you are unfamiliar with the process. Once that is done bring me the Refined Sylvan Morning Star, a Pristine Drakeling Scales, and an Arborean Amber.");
 		e.other:Faction(e.self,226,5,0); -- Faction: Clerics of Tunare
 		e.other:Faction(e.self,279,5,0); -- Faction: King Tearis Thex

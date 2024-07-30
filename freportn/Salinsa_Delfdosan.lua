@@ -1,7 +1,7 @@
 -- Quests for North Freeport - Salinsa Delfdosan: Ordained Armor Quests (Cleric Newbie Armor)
 
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say(string.format("Pleasure to meet you %s. I am Lady Salinsa Deifdosan of House Marr. I have spent many hours on the battlefield in service of our glorious god however these days I spend my time training new [recruits].",e.other:GetName()));
 		elseif(e.message:findi("recruits")) then
@@ -42,8 +42,7 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 9931,item2 = 9932, item3 = 9932})) then -- A Torn Qeynos Newsletter and Pristine Scarab Eyes 2x
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 9931,item2 = 9932, item3 = 9932})) then -- A Torn Qeynos Newsletter and Pristine Scarab Eyes 2x
 		e.self:Say("'I knew that Deisnak would still have this! This has more useful information to us here at the temple then you could imagine. I am very happy to see that you were able to get it back for me. For your tireless devotion to our House I would like to present you with this mace. It has brought me good fortune in all the days that I carried it, I only wish that it can do the same for you. Good luck Knobinshu, and thank you.");
 		e.other:Faction(e.self,281,25); -- Faction: Knights of Truth
 		e.other:Faction(e.self,271,-3); -- Faction: Dismal Rage

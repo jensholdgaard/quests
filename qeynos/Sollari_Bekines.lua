@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Hello, there! I am Sollari Bekines of the League of Antonican Bards. I am at your service to train you as best I can. There have been a number of young bards entering our concert halls lately seeking guidance. If you are a [young bard in search of training]. I might have some work for you.");
 		elseif(e.message:findi("young bard in search of training")) then
@@ -31,13 +31,17 @@ function event_say(e)
 		elseif(e.message:findi("final exercise")) then
 			e.self:Say("I need your help with ridding the hills of some of the most vile creatures, the gnolls of course! My resident alchemist has instructed me that he needs some items from these furballs for a antidote he is working on. I need you to bring me 2 Vials of Gnoll Blood and 2 Gnoll Pelvises. Once you have returned with these items I will reward you with a weapon worthy of the finest Qeynos Songweaver. I look forward to seeing you soon.");
 		end
+	else
+		if(e.message:findi("hail")) then
+			e.self:Say("Hello, there! I am Sollari Bekines of the League of Antonican Bards. I am at your service to train you as best I can. There have been a number of young bards entering our concert halls lately seeking guidance."); -- made up text		
+		end
 	end
 end
 
 function event_trade(e)
 	local item_lib = require("items");
 	local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 27423, item2 = 27423, item3 = 27424,item4 = 27424})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 27423, item2 = 27423, item3 = 27424,item4 = 27424})) then
 		e.self:Say("I will get this to my friend at once so that he can finish his antidote. I appreciate all you have done for me and you have surely proven yourself as a worth songweaver! Please take this blade I have forged for all graduates of my tests. May it lead you to unforeseen treasures and guard you always.");
 		-- Confirmed Live Experience and Factions.
 		e.other:Faction(e.self,284,10,0); -- league of antonican bards

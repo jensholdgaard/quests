@@ -1,8 +1,7 @@
 -- Converted to .lua by Speedz
 
 function event_say(e)
-	local expansion_flag = eq.get_current_expansion();
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Hail " .. e.other:GetCleanName() .. ". I am Kaxon Frennor, master assassin of the Dark Reflection. I train talented gnomes that feel the calling of the Plaguelord, Bertoxxulous, and wish to [serve as a rogue] of the Dark Reflection. Disease and decay are powerful forces in Norrath that crumble kingdoms and silently kill even the mightiest of heros. It is the calling of the Dark Reflection to sow the seeds of destruction as a catalyst to change. What progress would there be if rulers did not die and clockworks did not malfunction, giving way to greater rulers and better clockworks.");
 		elseif (e.message:findi("serve as a rogue")) then
@@ -13,15 +12,15 @@ function event_say(e)
 		end
 	else
 		if(e.message:findi("hail")) then
-			e.self:Say("Hail " .. e.other:GetCleanName() .. ". I am Kaxon Frennor, master assassin of the Dark Reflection. I train talented gnomes that feel the calling of the Plaguelord, Bertoxxulous, and wish to serve as a rogue of the Dark Reflection. Disease and decay are powerful forces in Norrath that crumble kingdoms and silently kill even the mightiest of heros. It is the calling of the Dark Reflection to sow the seeds of destruction as a catalyst to change. What progress would there be if rulers did not die and clockworks did not malfunction, giving way to greater rulers and better clockworks.");
-		end		
+			e.self:Say("Hail " .. e.other:GetCleanName() .. ". I am Kaxon Frennor, master assassin of the Dark Reflection. I train talented gnomes that feel the calling of the Plaguelord, Bertoxxulous. Disease and decay are powerful forces in Norrath that crumble kingdoms and silently kill even the mightiest of heros. It is the calling of the Dark Reflection to sow the seeds of destruction as a catalyst to change. What progress would there be if rulers did not die and clockworks did not malfunction, giving way to greater rulers and better clockworks."); -- text not accurate
+		end
 	end
 end
 
 function event_trade(e)
 	local expansion_flag = eq.get_current_expansion();
 	local item_lib = require("items");
-	if (expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 10992})) then
+	if (eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 10992})) then
 		e.self:Say("At last that haughty rogue has met his end. Take this Dull Dark Reflection Stiletto and sharpen it in a forge with a sharpening stone. It may take several attempts if you are unfamiliar with the process. Once the blade has been sharpened take the sharpened stiletto to Clockwork Smith XIII with a Giant Rat Pelt and he will put the finishing touches on your new weapon.");
 		e.other:Faction(e.self,238,10,0); 	-- Dark reflection
 		e.other:Faction(e.self,245,-1,0); 	-- eldritch collective

@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Hail dere me friend. I be Haldorak Foamymugs High Priest of Clerics dat heed the call of Brell. I am a very busy Dwarf for I have many new house recruits to train. Ye see I am in charge of all the young ones that pass through our halls. They must all undergo and pass me [tests] before they are truly ready to travel the dangerous world of Norrath.");
 		elseif(e.message:findi("tests")) then
@@ -58,11 +58,11 @@ end
 function event_trade(e)
 	local item_lib = require("items");
 	-- Handin: Aqua Goblin Blood, Green Goblin Blood
-	local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 28062, item2 = 28062, item3 = 28061, item4 = 28061})) then
-		-- Quest: Brells Blessed Platemail Help (End)
-		e.self:Say("Well done " .. e.other:GetCleanName() .. "! Here is your reward.");
-		-- Blessed Brellium Warhammer
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 28062, item2 = 28062, item3 = 28061, item4 = 28061})) then
+		e.self:Say("Dese are the exact samples I needed, I am sure my alchemist will be pleased! Yer good deeds will surely not go unnoticed , please take this weapon as a symbol of my gratitude!");
+		e.other:Faction(e.self,227,20);             -- Clerics of Underfoot
+		e.other:Faction(e.self,274,20);            -- Kazon Stormhammer
+		e.other:Faction(e.self,293,15);            -- Miners Guild 249
 		e.other:QuestReward(e.self,0,0,0,0,26075); -- Item: Blessed Brellium Warhammer
 	end
 end

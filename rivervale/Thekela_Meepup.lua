@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then -- confirmed no hail dialogue pre luclin
 		if(e.message:findi("hail")) then
 			e.self:Say("It is a pleasure to meet you " .. e.other:GetCleanName() .. ". I am Thekela Meepup, one of the highest ranking Clerics in all of Rivervale. I pride myself on being the mentor for all of the furryfooted that are called upon by Bristlebane to give life. If you are a [Cleric] I might have some training for you to complete if you so wish.");
 		elseif(e.message:findi("cleric")) then
@@ -43,7 +43,7 @@ end
 function event_trade(e)
 	local item_lib = require("items");
 	local expansion_flag = eq.get_current_expansion();
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 22668,item2 = 22696,item3 = 22696,item4 = 22696})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 22668,item2 = 22696,item3 = 22696,item4 = 22696})) then
 		e.self:Say("I knew that I could count on you to follow through in your training. You have surely proven yourself in the time that you have trained with me. Please take this Mace, as Bristlebane has blessed you with the power to give life to those that have fallen. Thank you, " .. e.other:GetCleanName() .. ". You have made me very proud!");
 		e.other:Faction(e.self,300,10);
 		e.other:Faction(e.self,286,1);

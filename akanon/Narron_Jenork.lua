@@ -3,7 +3,7 @@
 -- Converted to .lua by Speedz
 
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Pleased to meet you, " .. e.other:GetCleanName() .. "! I am Narron Jenork, High Watchman of Ak'anon. I am one of the most skilled Watchmans in all of Ak'anon, and I pride myself on training the most promising young warriors that Ak'anon has to offer. Are you a young gnome warrior?");
 		elseif(e.message:findi("young gnome warrior")) then
@@ -39,8 +39,12 @@ function event_say(e)
 		end
 	else
 		if(e.message:findi("hail")) then
-			e.self:Say("Pleased to meet you, " .. e.other:GetCleanName() .. "! I am Narron Jenork, High Watchman of Ak'anon. I am one of the most skilled Watchmans in all of Ak'anon, and I pride myself on training the most promising young warriors that Ak'anon has to offer.");
-		end		
+			e.self:Say("Come to train? You really should. The way of the warrior is all but abandoned within our grand city. We must build an army of warriors. We may need them should anything happen to the clockworks. Thank the Underfoot we have the [Watchmen].");	
+		elseif(e.message:findi("watchmen")) then
+			e.self:Say("The Watchmen are the elite of the Gemchoppers. It is not my duty to oversee their operations, but I can command them when I call upon the name of Ak'Anon. I have done so with Watchman [Dexlin].");
+		elseif(e.message:findi("dexlin")) then
+			e.self:Say("Oh my!! I sent Watchman Dexlin toward the great human city of Qeynos on the continent of Antonica. He was on a secret mission, but I have yet to hear word of his progress. Manik will be quite upset if anything happened to one of his Watchmen. Should you find yourself near Qeynos and happen upon Watchman Dexlin, aid him in any way you can.");
+		end
 	end
 end
 
@@ -48,7 +52,7 @@ function event_trade(e)
 	local item_lib = require("items");
 	local expansion_flag = eq.get_current_expansion();
 	
-	if(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 9111, item2 = 9112, item3 = 9113, item4 = 9114})) then
+	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 9111, item2 = 9112, item3 = 9113, item4 = 9114})) then
 		e.self:Say("Well done, young " .. e.other:GetCleanName() .. "! Since you have brought me the necessary items, I now present you with this Initiate Watchman's Long Sword. Use it worthily."); -- text made up
 		e.other:Faction(e.self,255,25); 	-- Gem Choppers better
 		e.other:Faction(e.self,288,6); 	-- Merchants of Ak'Anon better

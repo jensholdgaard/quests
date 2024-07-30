@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.get_current_expansion() >= 4.0) then
+	if(eq.is_the_shadows_of_luclin_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("I've little time for banter, unless you have come to me for training as a [new warrior] of the Bloodsabers move along.");
 		elseif(e.message:findi("new warrior")) then
@@ -9,6 +9,10 @@ function event_say(e)
 			e.other:SummonCursorItem(20205); -- Item: Note to Illie Roln
 		elseif(e.message:findi("small task")) then
 			e.self:Say("The Priests of Life and Knights of Thunder often travel the roads from Qeynos carrying messages for the farmers of the Plains of Karana and the Knights of Truth in Freeport on the opposite coast of Antonica. We have recently been sending Bloodsabers to the Plains of Karana in search of a possible location for a new hidden temple should the need arise. One of the messengers of the Knights of Thunder has alerted the peasants of the plains the possibility of a Bloodsaber presence there and is using them to track our motions. Find the messenger, Lukas Hergo, and bring me his head.");
+		end
+	else
+		if(e.message:findi("hail")) then
+			e.self:Say("I've little time for banter, unless you have come to me for training as a new warrior of the Bloodsabers move along."); -- made up text
 		end
 	end
 end
@@ -23,7 +27,7 @@ function event_trade(e)
 		e.other:Faction(e.self,341,-25); --Priest of Life
 		e.other:Faction(e.self,230,5); --Corrupt Qeynos Guards
 		e.other:QuestReward(e.self,0,0,0,0,13598,20); --Ruined Training Tunic*
-	elseif(expansion_flag >= 4.0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 20175})) then
+	elseif(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 20175})) then
 		e.self:Say("Well done " .. e.other:GetCleanName() .. ". Now take this Rusty Scourge Warrior Broadsword to a forge and sharpen it with a sharpening stone. It may take you several attempts if you are unfamiliar with the process. Once that is done take the Tarnished Scourge Warrior Sword and a Giant King Snake Skin to Illie Roln and he will put the finishing touches on the weapon.");
 		e.other:Faction(e.self,221,10); -- Faction: Bloodsabers
 		e.other:Faction(e.self,262,-1); -- Faction: Guards of Qeynos
