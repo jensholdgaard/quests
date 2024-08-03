@@ -6,7 +6,7 @@
 ----------------------------------
 
 function event_say(e) 
-	if(eq.is_the_scars_of_velious_enabled()) then
+	if(eq.is_the_ruins_of_kunark_enabled()) then
 		if(e.message:findi("Hail")) then
 			e.self:Emote("jumps at your voice, he's obviously very focused on a set of beakers on the table. They seem to be holding samples of rotted flesh. Gapeers says, 'Oh my heart! You could have stopped it! Please be careful when entering these chambers. It would be unfortunate if I had dropped and broken these [specimens].");
 		elseif(e.message:findi("what specimens")) then

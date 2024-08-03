@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.is_the_scars_of_velious_enabled()) then
+	if(eq.is_the_ruins_of_kunark_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Emote("appears to be ignoring you completely.");
 		elseif(e.message:findi("audience with the overlord")) then

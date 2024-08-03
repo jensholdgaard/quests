@@ -1,7 +1,7 @@
 --Shaman Skull Quest 6
 
 function event_say(e)
-	if(eq.is_the_shadows_of_luclin_enabled()) then
+	if(eq.is_the_ruins_of_kunark_enabled()) then
 		if(e.message:findi("Hail")) then
 			e.self:Emote("seems to be preocupied. He is examining an egg. 'What?!! Who has [sent] you to me? Bah!! Away with you.' He ignores you and continues chanting.'");
 		elseif(e.message:findi("di nozok sent")) then
