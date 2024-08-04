@@ -24,7 +24,7 @@ function enchant_bars._check_bar_type(item_lib, self, other, trade, bar_data)
                 other:SummonCursorItem(reward_id, 1); -- Enchanted Bar
                 num_bars = num_bars - 1;
             until num_bars == 0
-            self:Say("Your metal bar has been successfully imbued with the mystical energies you seek. Behold, its transformation is complete. May this enchanted metal serve as a testament to your growing intellect and mastery over the arcane. Use it with keen insight on your journey.");
+            self:Say("Your metal has been successfully imbued with the mystical energies you seek. Behold, its transformation is complete. May this enchanted metal serve as a testament to your growing intellect and mastery over the arcane. Use it with keen insight on your journey.");
             self:CastSpell(667,self:GetID()); -- Spell: Enchant Silver
         end	
     end
@@ -35,6 +35,7 @@ function enchant_bars._get_bar_data()
         {
             -- silver
             bar_name = "silver",
+            component_name = "Silver Bar",
             bar_id = 16500,
             reward_id = 16504,
             plat_cost = 5,
@@ -43,6 +44,7 @@ function enchant_bars._get_bar_data()
         {
             -- electrum
             bar_name = "electrum",
+            component_name = "Electrum Bar",
             required_level = 16,
             bar_id = 16501,
             reward_id = 16505,
@@ -51,6 +53,7 @@ function enchant_bars._get_bar_data()
         {
             -- gold
             bar_name = "gold",
+            component_name = "Gold Bar",
             required_level = 24,
             bar_id = 16502,
             reward_id = 16506,
@@ -59,11 +62,66 @@ function enchant_bars._get_bar_data()
         {
             -- platinum
             bar_name = "platinum",
+            component_name = "Platinum Bar",
             required_level = 34,
             bar_id = 16503,
             reward_id = 16507,
             plat_cost = 50,
-        }
+        },
+        {
+            -- velium
+            bar_name = "velium",
+            component_name = "Velium Bar",
+            required_level = 44,
+            bar_id = 22098,
+            reward_id = 22099,
+            plat_cost = 125,
+        },
+        {
+            -- clay
+            bar_name = "clay",
+            component_name = "Large Block of Clay",
+            required_level = 8,
+            bar_id = 16902,
+            reward_id = 16896,
+            plat_cost = 5,
+        },
+        {
+            -- mithril
+            bar_name = "mithril",
+            component_name = "Large Brick of Mithril",
+            required_level = 49,
+            bar_id = 10476,
+            reward_id = 10455,
+            plat_cost = 50,
+        },
+        {
+            -- adamantite
+            bar_name = "adamantite",
+            component_name = "Large Brick of Adamantite",
+            required_level = 49,
+            bar_id = 10475,
+            reward_id = 10449,
+            plat_cost = 60,
+        },
+        {
+            -- steel
+            bar_name = "steel",
+            component_name = "Large Brick of High Quality Ore",
+            required_level = 49,
+            bar_id = 10469,
+            reward_id = 10440,
+            plat_cost = 30,
+        },
+        {
+            -- brellium
+            bar_name = "brellium",
+            component_name = "Large Brick of Brellium",
+            required_level = 49,
+            bar_id = 10474,
+            reward_id = 10434,
+            plat_cost = 30,
+        },
     };
 end
 
@@ -80,7 +138,7 @@ function enchant_bars.check_bars_quest_dialogue(self, other, message)
         end
 
         if(message:findi("enchantments")) then
-            self:Say("You wish to explore the deeper mysteries of metallurgy and magic? A noble path. The enchantment of metal bars is a delicate art. I can enchant [silver], [electrum], [gold], and [platinum] bars. Which do you seek?");
+            self:Say("You wish to explore the deeper mysteries of metallurgy and magic? A noble path. The enchantment of metal is a delicate art. I can enchant [silver], [electrum], [gold], [platinum], [velium], [clay], [mithril], [adamantite], [steel], and [brellium]. Which do you seek?");
         end
         
     end
@@ -90,8 +148,8 @@ function enchant_bars.check_bar_quest_dialogue(self, other, message, bar_data)
     if(message:findi(bar_data.bar_name) and not message:findi("Hail")) then
         if (other:GetLevel() >= bar_data.required_level) then
             message = "Present me with " .. bar_data.plat_cost ..
-                     " platinum pieces, and your " .. bar_data.bar_name ..
-                     " bar, and we shall begin the process of its transformation.";
+                     " platinum pieces and your " .. bar_data.component_name ..
+                     ", and we shall begin the process of its transformation.";
             self:Say(message);
         else
             self:Say("You are a bit too inexperienced to be dabbling in such magic, aren't you?");
