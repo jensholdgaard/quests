@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.is_the_shadows_of_luclin_enabled()) then
+	if(eq.is_the_ruins_of_kunark_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Emote('shows no reaction to your greeting.');
 		elseif(e.message:findi("trial of agility")) then

@@ -24,7 +24,7 @@ function event_say(e)
 			e.self:Say("This is not available to you yet, come back later."); --made up
 		end	
 	elseif(e.message:findi("warden of tunare")) then
-		if(eq.is_the_scars_of_velious_enabled()) then
+		if(eq.is_the_ruins_of_kunark_enabled()) then
 			e.self:Say("The crate that the you recovered from the Courier contained this black candlestick that radiates an aura of great magical power. I request that you deliver the candlestick to Lady Trilani who is studying with the High Men in Erudin. Perhaps she can divine the nature of the candlestick and offer aid in defeating its power. The remaining contents of the crate have been given to Crusader Swiftmoon to be delivered to a gnome in steamfont that is purchasing them on behalf of the Eldrich Collective. When you return be sure to present your Disciple Symbol to me with anything that Trilani may ask you to deliver.");
 			e.other:SummonCursorItem(1598); -- Black Stone Candlestick
 		else
@@ -58,7 +58,7 @@ function event_trade(e)
 		e.other:Faction(e.self,5002,11,0);   --Anti-mage
 		e.other:QuestReward(e.self,0,0,0,0,1570,3250); --Initiate Symbol of Tunare
 	elseif(e.other:GetFactionValue(e.self) >= 0 and item_lib.check_turn_in(e.self, e.trade, {item1 = 1570,item2 = 12514,item3 = 19065,item4 = 12513})) then --Initiate Symbol of Tunare, Larik Z`Vole's Head, Teir`Dal Couriers Head, Teir`Dal Crate
-		if(eq.is_the_scars_of_velious_enabled()) then
+		if(eq.is_the_ruins_of_kunark_enabled()) then
 			e.self:Say("Praise Tunare! The Mother smiles on you this day Disciple " .. e.other:GetCleanName() .. "! I present you with the symbol of your new station among the Priests of Tunare. Return to me when you are ready to become a [Warden of Tunare]?");
 			e.other:Faction(e.self,226,30,0);  --Clerics of Tunare
 			e.other:Faction(e.self,279,30,0); --King Tearis Thex

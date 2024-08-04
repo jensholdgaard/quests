@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.is_the_scars_of_velious_enabled()) then
+	if(eq.is_the_ruins_of_kunark_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Say("Welcome, my child.  I am Leraena Shelyrak, overseer of the Temple of Divine Light. Inside this temple, you may find the path to inner peace.  Introduce yourself to each of the priests and priestesses of the temple as well as the paladins. Together we shall put an end to such disruptive influences as the [kobold shamans]."); 	
 		elseif(e.message:findi("guild coin")) then

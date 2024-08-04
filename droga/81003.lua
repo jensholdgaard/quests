@@ -1,5 +1,5 @@
 function event_say(e)
-	if(eq.is_the_scars_of_velious_enabled()) then
+	if(eq.is_the_ruins_of_kunark_enabled()) then
 		if(e.message:findi("hail")) then
 			e.self:Emote("seems to have lost all hope. He sadly looks to the ground. His shackles are different than the others you see in this cell. One is definitely steel and not of goblin design. The other is made of an unfamiliar metal.");
 		elseif(e.message:findi("veltar")) then
