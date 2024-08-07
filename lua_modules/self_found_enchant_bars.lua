@@ -90,7 +90,7 @@ function enchant_bars._get_bar_data()
             -- mithril
             bar_name = "mithril",
             component_name = "Large Brick of Mithril",
-            required_level = 49,
+            required_level = 20,
             bar_id = 10476,
             reward_id = 10455,
             plat_cost = 50,
@@ -99,7 +99,7 @@ function enchant_bars._get_bar_data()
             -- adamantite
             bar_name = "adamantite",
             component_name = "Large Brick of Adamantite",
-            required_level = 49,
+            required_level = 20,
             bar_id = 10475,
             reward_id = 10449,
             plat_cost = 60,
@@ -108,7 +108,7 @@ function enchant_bars._get_bar_data()
             -- steel
             bar_name = "steel",
             component_name = "Large Brick of High Quality Ore",
-            required_level = 49,
+            required_level = 20,
             bar_id = 10469,
             reward_id = 10440,
             plat_cost = 30,
@@ -117,7 +117,7 @@ function enchant_bars._get_bar_data()
             -- brellium
             bar_name = "brellium",
             component_name = "Large Brick of Brellium",
-            required_level = 49,
+            required_level = 20,
             bar_id = 10474,
             reward_id = 10434,
             plat_cost = 30,
