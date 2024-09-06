@@ -24,7 +24,7 @@ function enchant_bars._check_bar_type(item_lib, self, other, trade, bar_data)
                 other:SummonCursorItem(reward_id, 1); -- Enchanted Bar
                 num_bars = num_bars - 1;
             until num_bars == 0
-            self:Say("Your metal has been successfully imbued with the mystical energies you seek. Behold, its transformation is complete. May this enchanted metal serve as a testament to your growing intellect and mastery over the arcane. Use it with keen insight on your journey.");
+            self:Say("Behold, the transformation is complete. May this enchantment serve as a testament to your growing intellect and mastery over the arcane. Use it with keen insight on your journey.");
             self:CastSpell(667,self:GetID()); -- Spell: Enchant Silver
         end	
     end
@@ -122,6 +122,51 @@ function enchant_bars._get_bar_data()
             reward_id = 10434,
             plat_cost = 30,
         },
+        {
+            -- Vial of Viscous Mana
+            bar_name = "Viscous Mana",
+            component_name = "Pearl",
+            required_level = 8,
+            bar_id = 10024,
+            reward_id = 10250,
+            plat_cost = 10,
+        },
+        {
+            -- Vial of Cloudy Mana
+            bar_name = "Cloudy Mana",
+            component_name = "Peridot",
+            required_level = 12,
+            bar_id = 10028,
+            reward_id = 10251,
+            plat_cost = 20,
+        },
+        {
+            -- Vial of Clear Mana
+            bar_name = "Clear Mana",
+            component_name = "Emerald",
+            required_level = 16,
+            bar_id = 10029,
+            reward_id = 10252,
+            plat_cost = 30,
+        },
+        {
+            -- Vial of Distilled Mana
+            bar_name = "Distilled Mana",
+            component_name = "Sapphire",
+            required_level = 20,
+            bar_id = 10034,
+            reward_id = 10253,
+            plat_cost = 300,
+        },
+        {
+            -- Vial of Purified Mana
+            bar_name = "Purified Mana",
+            component_name = "Ruby",
+            required_level = 24,
+            bar_id = 10035,
+            reward_id = 10254,
+            plat_cost = 700,
+        },
     };
 end
 
@@ -140,7 +185,15 @@ function enchant_bars.check_bars_quest_dialogue(self, other, message)
         if(message:findi("Hail")) then
             self:Say("Are you in need of [enchantments]? If so, I may be able to help you.");
         elseif(message:findi("enchantments")) then
+            self:Say("Are you seeking enchantments of [metal and ore]? Or perhaps you are looking for enchanted [mana vials]?");
+        elseif(message:findi("metal")) then
             self:Say("You wish to explore the deeper mysteries of metallurgy and magic? A noble path. The enchantment of metal is a delicate art. I can enchant [silver], [electrum], [gold], [platinum], [velium], [clay], [mithril], [adamantite], [steel], and [brellium]. Which do you seek?");
+        elseif(message:findi("mana vials")) then
+            if eq.is_the_scars_of_velious_enabled() then
+                self:Say("Enchanted mana is a very concentrated, potent substance that requires a gemstone catalyst for the transformation. There are various formulations of enchanted mana, [viscous mana], [cloudy mana], [clear mana], [distilled mana], and [purified mana]. Which do you seek?");
+            else
+                self:Say("Enchanted mana is a very concentrated, potent substance that requires a gemstone catalyst for the transformation. There are various formulations of enchanted mana, [viscous mana], [cloudy mana], [clear mana], and [distilled mana]. Which do you seek?");
+            end
         end
         
     end
