@@ -496,6 +496,11 @@ function items.count_handed_item(npc, trade, items, min_count)
 		if(inst ~= nil and inst.valid) then
 			if(inst:GetID() > 0 and (itemid1 == inst:GetID() or itemid2 == inst:GetID() or itemid3 == inst:GetID() or itemid4 == inst:GetID() or 
 			itemid5 == inst:GetID() or itemid6 == inst:GetID() or itemid7 == inst:GetID() or itemid8 == inst:GetID())) then
+                                while(inst:IsStackable() and inst:GetCharges() > 1) do
+                                        count = count + 1
+                                        handed_count = handed_count + 1;
+                                        inst:SetCharges(inst:GetCharges() - 1)
+                                end
 				count = count + 1;
 				handed_count = handed_count + 1;
 				if(min_count > 1) then
