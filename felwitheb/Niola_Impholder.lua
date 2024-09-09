@@ -17,14 +17,18 @@ end
 function event_trade(e)
 	local item_lib = require("items");
 
-	if(e.other:GetFactionValue(e.self) >= 0 and item_lib.count_handed_item(e.self, e.trade, {13068}, 4) > 0) then
-		e.self:Say("Ah yes.  These are exactly what I need.  Thank you very much.");
-		e.other:Faction(e.self,275,2,0); -- Faction: Keepers of the Art
-		e.other:Faction(e.self,279,1,0); -- Faction: King Tearis Thex
-		e.other:Faction(e.self,246,1,0); -- Faction: Faydarks Champions
-		e.other:Faction(e.self,239,-1,0); -- Faction: The Dead
-		-- Confirmed Live Experience
-		e.other:QuestReward(e.self,0,0,0,0,eq.ChooseRandom(15310,15310,15310,15310,15310,15310,15310,15310,15310,15332),10); -- Item(s): Spell: Flare (15310), Spell: Shield of Fire (15332)
+	local batwings = item_lib.count_handed_item(e.self, e.trade, {13068}, 4)
+	if(e.other:GetFactionValue(e.self) >= 0 and batwings > 0) then
+		repeat
+			e.self:Say("Ah yes.  These are exactly what I need.  Thank you very much.");
+			e.other:Faction(e.self,275,2,0); -- Faction: Keepers of the Art
+			e.other:Faction(e.self,279,1,0); -- Faction: King Tearis Thex
+			e.other:Faction(e.self,246,1,0); -- Faction: Faydarks Champions
+			e.other:Faction(e.self,239,-1,0); -- Faction: The Dead
+			-- Confirmed Live Experience
+			e.other:QuestReward(e.self,0,0,0,0,eq.ChooseRandom(15310,15310,15310,15310,15310,15310,15310,15310,15310,15332),10); -- Item(s): Spell: Flare (15310), Spell: Shield of Fire (15332)
+			batwings = batwings - 1;
+		until batwings == 0;
 	elseif(item_lib.check_turn_in(e.self, e.trade, {item1 = 18777},0)) then -- Enrollment Letter
 		e.self:Say("Welcome. I am Niola Impholder. Master Magician of the Keepers of the Art. Here is our guild tunic. You have much to learn, so let's get started.");
 		e.other:Faction(e.self,275,100,0); -- Keepers of the Art
