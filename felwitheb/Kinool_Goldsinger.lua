@@ -40,8 +40,9 @@ function event_trade(e)
 	end
 
 	local enchant_bars_lib = require("self_found_enchant_bars");
+	local require_cast = true;
 
-	enchant_bars_lib.check_for_bars_to_enchant(item_lib, e.self, e.other, e.trade);
+	enchant_bars_lib.check_for_bars_to_enchant(item_lib, e.self, e.other, e.trade, require_cast);
 
 	item_lib.return_items(e.self, e.other, e.trade);
 end
