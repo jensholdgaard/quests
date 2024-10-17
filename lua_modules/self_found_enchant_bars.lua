@@ -1,6 +1,6 @@
 local enchant_bars = {}
 
-function enchant_bars._check_bar_type(item_lib, self, other, trade, bar_data)
+function enchant_bars._check_bar_type(item_lib, self, other, trade, bar_data, require_cast)
     local num_bars = 0;
     local required_level = bar_data.required_level;
     local bar_id = bar_data.bar_id;
@@ -24,8 +24,12 @@ function enchant_bars._check_bar_type(item_lib, self, other, trade, bar_data)
                 other:SummonCursorItem(reward_id, 1); -- Enchanted Bar
                 num_bars = num_bars - 1;
             until num_bars == 0
-            self:Say("Behold, the transformation is complete. May this enchantment serve as a testament to your growing intellect and mastery over the arcane. Use it with keen insight on your journey.");
-            self:CastSpell(667,self:GetID()); -- Spell: Enchant Silver
+            if(require_cast) then
+                self:Say("Behold, the transformation is complete. May this enchantment serve as a testament to your growing intellect and mastery over the arcane. Use it with keen insight on your journey.");
+                self:CastSpell(667,self:GetID()); -- Spell: Enchant Silver
+            else
+                self:Say("Here you go.");
+            end
         end	
     end
 end
@@ -212,7 +216,7 @@ function enchant_bars.check_bar_quest_dialogue(self, other, message, bar_data)
     end 
 end 
 
-function enchant_bars.check_for_bars_to_enchant(item_lib, self, other, trade)
+function enchant_bars.check_for_bars_to_enchant(item_lib, self, other, trade, require_cast)
 
     local is_self_found = other:IsSelfFound() == 1 or other:IsSoloOnly() == 1;
 
@@ -221,7 +225,7 @@ function enchant_bars.check_for_bars_to_enchant(item_lib, self, other, trade)
     if(is_self_found) then
         -- Loop through each type of bar and see if this is what they are turning in
         for index, bar_data in ipairs(bar_data_list) do
-            enchant_bars._check_bar_type(item_lib, self, other, trade, bar_data);
+            enchant_bars._check_bar_type(item_lib, self, other, trade, bar_data, require_cast);
         end
     end
 end
