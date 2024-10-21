@@ -33,16 +33,18 @@ function items.check_turn_in(npc, trade, trade_check, keepitems, text, emote)
 		for a = 1, 4 do
 			local add = trade_return["item" .. a];
 			local itemid = 0;
+			local charges = 0;
 			for b = 1, 4 do
 				local curkey = "item" .. b;
 				if(add ~= nil and add.valid and trade_check[curkey] ~= nil and trade_check[curkey] ~= 0) then
 					if(trade_check[curkey] == add:GetID()) then
-						eq.debug("Item " .. add:GetID() .. " added to QUEST loot.", 3);
-						npc:AddQuestLoot(add:GetID());
+						eq.debug("Item " .. add:GetID() .. " added to QUEST loot with " .. add:GetCharges() .. " charges.", 3);
+						npc:AddQuestLoot(add:GetID(), add:GetCharges());
 						trade_return["item" .. a] = nil;
 						founditem = true;
                         accepted = true;
 						itemid = 0;
+						charges = 0;
 
 						if(text ~= nil or emote ~= nil) then
 							required_items = required_items - 1;
@@ -58,12 +60,13 @@ function items.check_turn_in(npc, trade, trade_check, keepitems, text, emote)
 						break;
 					else
 						itemid = add:GetID();
+						charges = add:GetCharges();
 					end
 				end
 			end
 			if(npc:Charmed() and itemid > 1000 and not npc:GetPetLoot(itemid) and not npc:GetQuestLoot(itemid)) then
-				eq.debug("Item " .. itemid .. " added to PET loot.", 3);
-				npc:AddPetLoot(itemid);
+				eq.debug("Item " .. itemid .. " added to PET loot with " .. charges .. " charges.", 3);
+				npc:AddPetLoot(itemid, charges);
 			end
 		end
 		-- The npc was handed an item it doesn't need.
@@ -234,12 +237,13 @@ function items.check_turn_in_nomq(npc, trade, trade_check, keepitems, text, emot
 		for a = 1, 4 do
 			local add = trade_return["item" .. a];
 			local itemid = 0;
+			local charges = 0;
 			for b = 1, 4 do
 				local curkey = "item" .. b;
 				if(add ~= nil and add.valid and trade_check[curkey] ~= nil and trade_check[curkey] ~= 0) then
 					if(trade_check[curkey] == add:GetID()) then
-						eq.debug("Item " .. add:GetID() .. " added to QUEST loot.", 3);
-						npc:AddQuestLoot(add:GetID());
+						eq.debug("Item " .. add:GetID() .. " added to QUEST loot with " .. add:GetCharges() .. " charges.", 3);
+						npc:AddQuestLoot(add:GetID(), add:GetCharges());
 						trade_return["item" .. a] = nil;
 						founditem = true;
                         accepted = true;
@@ -259,12 +263,13 @@ function items.check_turn_in_nomq(npc, trade, trade_check, keepitems, text, emot
 						break;
 					else
 						itemid = add:GetID();
+						charges = add:GetCharges();
 					end
 				end
 			end
 			if(npc:Charmed() and itemid > 1000 and not npc:GetPetLoot(itemid) and not npc:GetQuestLoot(itemid)) then
-				eq.debug("Item " .. itemid .. " added to PET loot.", 3);
-				npc:AddPetLoot(itemid);
+				eq.debug("Item " .. itemid .. " added to PET loot with " .. charges .. " charges.", 3);
+				npc:AddPetLoot(itemid, charges);
 			end
 		end
 		-- The npc was handed an item it doesn't need.
@@ -416,16 +421,16 @@ function items.return_items(npc, client, trade, text)
 			-- If the npc does not have this item in their quest loot, then it needs to be returned.
 			
 			local itemid = inst:GetID();
+			local charges = inst:GetCharges();
 			if(not npc:GetQuestLoot(itemid)) then
 			
 				if (npc:Charmed()) then
 					if (itemid > 1000 and not npc:GetPetLoot(itemid)) then
-						eq.debug("Item " .. itemid .. " added to PET loot.", 3);
-						npc:AddPetLoot(itemid);
+						eq.debug("Item " .. itemid .. " added to PET loot with " .. charges .. " charges.", 3);
+						npc:AddPetLoot(itemid, charges);
 					end
 				else		
 			
-					local charges = inst:GetCharges();
 					client:SummonItem(itemid, charges, 9999, true);
 					if (npc:CanTalk()) then
 						if (not text) then
@@ -527,7 +532,7 @@ function items.count_handed_item(npc, trade, items, min_count)
 				if(mq_loot["item" .. i] ~= nil) then
 					local mqitem = mq_loot["item" .. i];
 					if(mqitem ~= nil and mqitem.valid) then
-						npc:AddQuestLoot(mqitem:GetID());
+						npc:AddQuestLoot(mqitem:GetID(), mqitem:GetCharges());
 						clear_loot = false;
 						if(remainder == 1) then
 							break;
