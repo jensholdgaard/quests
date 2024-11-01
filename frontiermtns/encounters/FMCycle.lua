@@ -25,7 +25,7 @@ end
 function GoblinSE(e)
 	local goblin;
 	local location = math.random(6);
-	if(math.random(100) > 45) then
+	if(math.random(100) > 100) then
 		goblin = 92011;
 	else
 		goblin = eq.ChooseRandom(92004,92009,92012,92020,92021,92022,92023,92024,92197);
@@ -48,7 +48,7 @@ end
 function GiantSW(e)
 	local giant;
 	local location = math.random(6);
-	if(math.random(100) > 45) then
+	if(math.random(100) > 100) then
 		giant = 92055;
 	else
 		giant = eq.ChooseRandom(92030,92025,92028,92031);
@@ -71,7 +71,7 @@ end
 function BurynaiNW(e)
 	local burynai;
 	local location = math.random(6);
-	if(math.random(100) > 45) then
+	if(math.random(100) > 100) then
 		burynai = 92010;
 	else
 		burynai = eq.ChooseRandom(92003,92013,92008,92034,92017,92145,92015);
@@ -94,7 +94,7 @@ end
 function BruteSE(e)
 	local brute;
 	local location = math.random(6);
-	if(math.random(100) > 45) then
+	if(math.random(100) > 100) then
 		brute = 92056;
 	else
 		brute = eq.ChooseRandom(92176,92036,92037,92038,92039);
@@ -117,7 +117,7 @@ end
 function MiscSW(e)
 	local misc;
 	local location = math.random(6);
-	if(math.random(100) > 45) then
+	if(math.random(100) > 100) then
 		misc = 92057;
 	else
 		misc = eq.ChooseRandom(92029,92026,92044,92045,92046,92047);
@@ -140,7 +140,7 @@ end
 function SarnakNW(e)
 	local sarnak;
 	local location = math.random(6);
-	if(math.random(100) > 45) then
+	if(math.random(100) > 100) then
 		sarnak = 92048;
 	else
 		sarnak = eq.ChooseRandom(92040,92007,92014,92033,92035,92041,92050,92053,92054,92059);
