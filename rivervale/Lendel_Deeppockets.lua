@@ -48,7 +48,7 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
+	
 	if(item_lib.check_turn_in(e.self, e.trade, {item1 = 18732})) then -- Tattered Note
 		e.self:Say("HA! I asked that fool Denry to send me a professional, and this is what I get?!? Oh diddlepicks! That crotchety old coot never liked me anyway. And after all I've done for him! Hrrmf! Ah well, let's get you started and see what ya got, huh, kid? Here, wear this. Maybe I'll have Toelia break you in, huh? Yeah, that'll work! Go find her, and she'll put you to work. Just remember, we all earn our keep around here, or else it's back to hay farm for you! Oh yeah, tell her you're the [new dishwasher] so she knows you are on the level.");
 		e.other:Faction(e.self,241,100,0); -- Deeppockets

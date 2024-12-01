@@ -56,7 +56,7 @@ function event_say(e)
 end
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
+	
 	local item_awarded = eq.ChooseRandom(5374, 13394);
 	if(e.other:GetFactionValue(e.self) >= 100 and item_lib.check_turn_in(e.self, e.trade, {item1 = 18828})) then--Testimony
 		e.self:Say("So you have succeeded where others have failed. You show promise. Take this then. You shall be a valuable asset to the Dead and soon this shall be of value to one so great. This will help you on your way. Are you still interested in my [appointed tasks]?");

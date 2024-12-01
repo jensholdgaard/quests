@@ -19,7 +19,7 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
+	
 	if(item_lib.check_turn_in(e.self, e.trade, {item1 = 18734})) then -- Tattered Note
 		e.self:Say("Hello, friend! I am Hibbs Rootenpaw, leader of the Storm Reapers. Our guild works together with Will Tagglefoot and his family on their farm, to produce the food supply for all of Rivervale. With Karana's help, we have a bountiful harvest every season. We're glad you could help us out. Here's your guild tunic, it'll help keep you dry during the wet months. Go find Reebo out in the fields. He'll help get you started. Welcome aboard! May you serve Karana well.");
 		e.other:Faction(e.self,355,100,0); -- +Storm Reapers

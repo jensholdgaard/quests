@@ -39,7 +39,7 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
+	
 	if(item_lib.check_turn_in(e.self, e.trade, {item1 = 18716})) then --Tattered Note
 		e.self:Say("Hmmm. Another rat has found its way to my doorstep, huh? Well, we may have use for you. Go find Rihtur, maybe he has an errand for you.");
 		e.other:Faction(e.self,221,100); --Bloodsabers

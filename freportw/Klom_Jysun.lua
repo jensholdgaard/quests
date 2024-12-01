@@ -42,7 +42,6 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
 	
 	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 9934,item2 = 9920,item3 = 9920})) then
 		e.self:Say("Your dedication to the Ashen Fist is unquestioned. I can see this by your willingness to assist me in whatever task I assigned you. I would like you to take this as a symbol of my gratitude.");

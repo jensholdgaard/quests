@@ -19,7 +19,7 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
+	
 	if(item_lib.check_turn_in(e.self, e.trade, {item1 = 18853})) then --Blood Stained Note
 		e.other:Faction(e.self,221,100); --Bloodsabers
 		e.other:Faction(e.self,262,-15); --Guards of Qeynos

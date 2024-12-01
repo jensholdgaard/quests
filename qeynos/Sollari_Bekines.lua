@@ -40,7 +40,7 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
+
 	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 27423, item2 = 27423, item3 = 27424,item4 = 27424})) then
 		e.self:Say("I will get this to my friend at once so that he can finish his antidote. I appreciate all you have done for me and you have surely proven yourself as a worth songweaver! Please take this blade I have forged for all graduates of my tests. May it lead you to unforeseen treasures and guard you always.");
 		-- Confirmed Live Experience and Factions.

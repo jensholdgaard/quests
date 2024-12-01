@@ -21,7 +21,6 @@ function event_say(e)
 end
 
 function event_trade(e)
-	local expansion_flag = eq.get_current_expansion();
 	local item_lib = require("items");
 	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 10990})) then -- Yulcabis's axe
 		e.self:Say("Well done " .. e.other:GetCleanName() .. ". Take this Dull Dark Reflection Axe and sharpen it in a forge with a sharpening stone. It may take several attempts if you are unfamiliar with the process. Once the axe has been sharpened take it to Clockwork SmithXIII with a Coyote Pelt and he will put the finishing touches on the weapon.");

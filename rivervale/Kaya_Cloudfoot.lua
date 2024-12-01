@@ -19,7 +19,7 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
+
 	if(item_lib.check_turn_in(e.self, e.trade, {item1 = 18431})) then -- Halfling Paladin Note
 		e.self:Say("Karana smiles upon you young " .. e.other:GetCleanName() .. "! Take this tunic to keep you warm through the storms you must face. There is evil encroaching upon the lands of Karana's faithful. The wicked minions of Bertoxxulous and the Teir'Dal children of Hate corrupt the lands to the west and east, and the Deathfist Clan of Orcs are waging war on this region while destoying the wilderness for lumber and stone. It is Karana's will that we defend our lands and way of life from these evil threats.");
 		e.other:Faction(e.self,355,100,0); -- +Storm Reapers

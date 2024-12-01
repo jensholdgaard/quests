@@ -40,7 +40,6 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
 
 	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 9919,item2 = 9918,item3 = 9923})) then -- Pristine Giant Scarab Leg, Lion Paw, Vial of Smoke
 		e.self:Say("Your determination to further your training and knowledge never ceases to amaze me. I knew I could count on you to retrieve these items for me. Luck was also on my side because I was able to craft the blade we spoke of before. May it protect you in all of your battles that await you. Excellent work "..e.other:GetName()..".");

@@ -42,7 +42,7 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
+	
 	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 22668,item2 = 22696,item3 = 22696,item4 = 22696})) then
 		e.self:Say("I knew that I could count on you to follow through in your training. You have surely proven yourself in the time that you have trained with me. Please take this Mace, as Bristlebane has blessed you with the power to give life to those that have fallen. Thank you, " .. e.other:GetCleanName() .. ". You have made me very proud!");
 		e.other:Faction(e.self,300,10);

@@ -45,7 +45,7 @@ end
 function event_trade(e)
 
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
+	
 	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 27416,item2 = 27405,item3 = 27405})) then
 		e.self:Say("These are exactly what I was looking for " .. e.other:GetCleanName() .. "! I am very proud to have one as noble as yourself amongst our ranks! Please take this mace as a token of my appreciation. I bid you farewell, and safe travels.");
 		-- Confirmed Live Experience and Faction

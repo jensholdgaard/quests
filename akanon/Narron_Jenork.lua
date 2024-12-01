@@ -50,7 +50,6 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
 	
 	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 9111, item2 = 9112, item3 = 9113, item4 = 9114})) then
 		e.self:Say("Well done, young " .. e.other:GetCleanName() .. "! Since you have brought me the necessary items, I now present you with this Initiate Watchman's Long Sword. Use it worthily."); -- text made up

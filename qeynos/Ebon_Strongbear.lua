@@ -44,7 +44,7 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
+	
 	if(item_lib.check_turn_in(e.self, e.trade, {item1 = 18707})) then -- Recruitment Flyer
 		e.self:Say("Welcome to the Hall of Steel, our swords are strong, and our warriors stronger. Here is our guild tunic. Brin Stolunger is in charge of our new recruits. Go see him, and he'll teach the basics. You look like you'll make a fine addition to our guild.");
 		e.other:Faction(e.self,311,100,0); -- Steel Warriors

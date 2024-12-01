@@ -44,8 +44,7 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
-
+	
 	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 9924,item2 = 9925,item3 = 9926})) then
 		e.self:Say("I knew I could count on you " .. e.other:GetCleanName() .. "! The defeat of these high ranking orcs will definitely be a positive turn in our constant battle of ridding the commons of these vile creatures. For your dedication to the Choir of Lore I would like to present you with this blade. May it keep you safe and serve you well wherever your journeys may take you.");
 		e.other:Faction(e.self,284,25); -- league of antonican bards

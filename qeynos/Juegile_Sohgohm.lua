@@ -48,7 +48,7 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	local expansion_flag = eq.get_current_expansion();
+	
 	if(eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 27431})) then
 		e.self:Say("I knew I could rely on Rephas to finish this research for me. We both know that this would not have been possible without your help young " .. e.other:GetCleanName() .. " . Please take this dagger as a symbol of your dedication to the Order of Three. Your good deeds will surely be known throughout our guildhouse. Good luck to you!");
 		-- Confirmed Live Experience and Faction

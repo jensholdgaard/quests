@@ -18,7 +18,6 @@ function event_say(e)
 end
 
 function event_trade(e)
-	local expansion_flag = eq.get_current_expansion();
 	local item_lib = require("items");
 	if (eq.is_the_shadows_of_luclin_enabled() and item_lib.check_turn_in(e.self, e.trade, {item1 = 10992})) then
 		e.self:Say("At last that haughty rogue has met his end. Take this Dull Dark Reflection Stiletto and sharpen it in a forge with a sharpening stone. It may take several attempts if you are unfamiliar with the process. Once the blade has been sharpened take the sharpened stiletto to Clockwork Smith XIII with a Giant Rat Pelt and he will put the finishing touches on your new weapon.");
