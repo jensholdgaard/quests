@@ -14,6 +14,50 @@ function event_say(e)
 		else
 			e.self:Say("Ah, you tread the common path, where certain secrets remain veiled.");
 		end
+	elseif (e.message:findi("become a king")) then
+		e.self:Say("Bring me a Vial of Swirling Smoke and this token, and a King you shall be.");
+		e.other:SummonCursorItem(13992); -- 'King'
+		return;
+
+	elseif (e.message:findi("become a queen")) then
+		e.self:Say("Bring me a Vial of Swirling Smoke and this token, and a Queen you shall be.");
+		e.other:SummonCursorItem(13993); -- 'Queen'
+		return;
+
+	elseif(e.message:findi("attribute points")) then
+		local stats = eq.ParseAttributes(e.message);
+		local total = stats.STR + stats.STA + stats.AGI + stats.DEX + stats.WIS + stats.INT + stats.CHA;
+		if (total == 0 or not e.message:findi("change")) then
+			e.self:Say("To retrain your natural abilities, you must declare you goal to [change attributes points].");
+			e.other:Message(15, "Your [attribute points] must be written out in this format: 10 int 5 wis 15 cha.");
+			e.other:Message(15, "Attributes can only be changed every 7 days.");
+		elseif (e.other:SetBaseStatAllocation(stats.STR, stats.STA, stats.AGI, stats.DEX, stats.WIS, stats.INT, stats.CHA, true)) then
+			e.other:Save();
+			e.self:Say("Your body and mind will start to adjust. Now go. You must rest or leave to complete this process.");
+		end
+		return;
+		
+	elseif(e.message:findi("newgame plus")) then
+		if (e.other:GetLevel() > 10) then
+			local stats = eq.ParseAttributes(e.message);
+			local total = stats.STR + stats.STA + stats.AGI + stats.DEX + stats.WIS + stats.INT + stats.CHA;
+			local gender = eq.FindGender(e.message);
+			local race = eq.FindRace(e.message);
+			local deity = eq.FindDeity(e.message);
+			local city = eq.FindCityChoice(e.message);
+			if (gender == -1 or race == -1 or deity == -1 or city == -1 or total == 0) then
+				e.self:Say("Choose your new identity and begin a new adventure. Speak to me again and declare your [newgame plus] [gender], [race], [deity], [home city], and [attribute points].");
+				e.other:Message(15, "Your [attribute points] must be written out in a format such as: 10 int 5 wis 15 cha");
+				e.other:Message(15, "You level will be reset back to level 10, along with your faction and location. Your spells, AAs, and skill ranks will remain intact.");
+				return;
+			end
+			if (e.other:SetBaseRaceAndStatAllocation(race, deity, city, stats.STR, stats.STA, stats.AGI, stats.DEX, stats.WIS, stats.INT, stats.CHA)) then
+				e.other:SetBaseGender(gender);
+				e.other:ResetPlayerForNewGamePlus();
+				return;
+			end
+		end
+		return;
 	end
 	if(e.other:GetLevel() == 1 and e.other:IsSelfFound() == 0 and e.other:IsSoloOnly() == 0 and e.other:IsHardcore() == 0) then
 		if(e.message:findi("challenges")) then
@@ -51,7 +95,11 @@ function event_say(e)
 		end
 	else
 		if(e.message:findi("challenges")) then
-		e.self:Say("I can't offer you anything as you are above the first season, or have already chosen your challenges. Begone, mortal.");
+			if (e.other:GetLevel() > 10) then
+				e.self:Say("Though I can't offer new challenges to a seasoned adventurer, perhaps the [newgame plus] challenge would interest you.");
+			else
+				e.self:Say("I can't offer you anything as you are above the first season, or have already chosen your challenges. Begone, mortal.");
+			end
 		elseif(e.message:findi("solo")) then
 			e.self:Say("I can't offer you anything as you are above the first season, or have already chosen your challenges. Begone, mortal.");
 		elseif(e.message:findi("self found")) then
@@ -68,7 +116,12 @@ function event_trade(e)
 		e.self:Say("I see you wish to join us in Discord! Welcome! By turning your back on the protection of Order you are now open to many more opportunities for glory and power. Remember that you can now be harmed by those who have also heard the call of Discord.");
 		e.other:SetPVP(true);
 		e.other:Ding();
+	elseif (item_lib.check_turn_in_nomq(e.self, e.trade, {item1 = 14402, item2 = 13992})) then -- Vial of Swirling Smoke, King
+		e.other:PermaGender(0);
+	elseif (item_lib.check_turn_in_nomq(e.self, e.trade, {item1 = 14402, item2 = 13993})) then -- Vial of Swirling Smoke, Queen
+		e.other:PermaGender(1);
 	end
+	item_lib.return_items(e.self, e.other, e.trade)
 end
 
 -------------------------------------------------------------------------------------------------
