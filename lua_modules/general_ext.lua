@@ -52,19 +52,10 @@ function eq.ParseAttributes(input)
     -- Pattern to match the number followed by the attribute name
     for value, attribute in input:gmatch("(%d+)%s*(%a+)") do
         value = tonumber(value) -- Convert matched value to a number
-        if attributes[attribute] ~= nil and value >= 0 and value <= 25 then
+        if attributes[attribute] ~= nil and value >= 0 and value <= 30 then
             attributes[attribute] = value
         end
     end
-	
-	-- Attributes will be validated in Lua_Client, clamp them for sanity
-	for attribute, value in pairs(attributes) do
-		if (value < 0) then
-			attributes[attribute] = 0;
-		elseif (value > 30) then
-			attributes[attribute] = 30;
-		end
-	end
 
     return attributes;
 end
