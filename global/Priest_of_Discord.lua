@@ -85,7 +85,7 @@ function event_say(e)
 		end
 	else
 		if(e.message:findi("challenges")) then
-			if (e.other:GetLevel() > 59 and e.other:IsSelfFound() == 0 and e.other:IsSoloOnly() == 0 and e.other:IsHardcore() == 0) then
+			if (e.other:GetLevel() > 59) then
 				e.self:Say("Though I can't offer new challenges to a seasoned adventurer, perhaps being [reborn] would interest you... unless you'd like trade in your gender to become a [king] or [queen].");
 			else
 				e.self:Say("I can't offer you anything as you are above the first season, or have already chosen your challenges. Begone, mortal. Unless, of course, you'd like trade in your gender to become a [king] or [queen].");
