@@ -38,7 +38,7 @@ function event_say(e)
 				e.self:Say("To be [reborn] is to shed the weight of your past trials and embrace a new beginning. Through the path of Discord, you may start anew, carrying forward the wisdom of your journey. Fear not, your hard-won items and treasured equipment shall remain with you, symbols of your strength and perseverance. Those who walk this road will earn the title 'the Reborn' - a badge of both your sacrifice and your triumph. Speak to me again and declare your [reborn] [gender], [race], [deity], [home city], and [attribute points].");
 				e.other:Message(15, "Your [attribute points] must be written out in a format such as: 10 int 5 wis 15 cha");
 				e.other:Message(15, "Your level will be reset back to level 10, along with your faction and location. Your spells, AAs, and skill ranks will remain intact.");
-				e.other:Message(15, "Your surname will be changed to a Norrathian numeral indicating how many times you have been reborn. In the future, this NPC will also add an additional last name to this Norrathian numeral.");
+				e.other:Message(15, "Your surname will be changed to a Norrathian numeral indicating how many times you have been reborn. It will be possible to change the surname's style in the future.");
 				return;
 			end
 			if (e.other:PermaRace(race, deity, city, stats.STR, stats.STA, stats.AGI, stats.DEX, stats.WIS, stats.INT, stats.CHA)) then
@@ -46,6 +46,8 @@ function event_say(e)
 				e.other:ResetPlayerForNewGamePlus();
 				return;
 			end
+		else
+			e.other:Message(15, "You lack experience. Begone. Return to me when you are of the 60th season.");
 		end
 		return;
 	end
