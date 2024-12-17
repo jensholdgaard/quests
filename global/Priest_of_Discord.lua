@@ -24,7 +24,7 @@ function event_say(e)
 		e.other:SummonCursorItem(13993); -- 'Queen'
 		return;
 		
-	elseif(e.message:findi("newgame plus") and e.other:IsSelfFound() == 0 and e.other:IsSoloOnly() == 0 and e.other:IsHardcore() == 0) then
+	elseif(e.message:findi("newgame plus")) then
 		if (e.other:GetLevel() > 59) then
 			local stats = eq.ParseAttributes(e.message);
 			local total = stats.STR + stats.STA + stats.AGI + stats.DEX + stats.WIS + stats.INT + stats.CHA;
@@ -47,7 +47,7 @@ function event_say(e)
 		end
 		return;
 	end
-	if(e.other:GetLevel() == 1 and e.other:IsSelfFound() == 0 and e.other:IsSoloOnly() == 0 and e.other:IsHardcore() == 0) then
+	if(e.other:GetLevel() == 1) then
 		if(e.message:findi("challenges")) then
 			-- TODO: Would like to add more flavor here, potentially splitting this into multiple descriptions, one for each challenge mode
 			e.self:Say("I can offer you flags for the [solo], [self found], and [hardcore] challenges. You must tell me all of the challenges you wish to embark on in the same sentence. In the [solo] challenge, all external interactions become unavailable - as well as external buffs. In the [self found] challenge you are prevented from interacting with anyone else except others with the same flags of similar level, though you are additionally prevented from trading. There is also the [hardcore] challenge, which will result in your mortal coil being emptied - permanently - on death. You may include all three of these challenges together.");
