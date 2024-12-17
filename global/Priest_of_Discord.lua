@@ -1,7 +1,7 @@
 function event_say(e)
 	local is_special_flag_response = false;
 	if(e.message:findi("Hail")) then
-		e.self:Say("Greetings, " .. e.other:GetCleanName() .. " .  Are you a child of Order?  If you have come seeking the path of Discord. I require only that you give me your [Tome of Order and Discord] and I shall show you the way.  Only then will you be freed from Order's confining restraints. If you are drawn to the allure of the uncharted, inquire about the secret [challenges] and their hidden [rites]. These are not mere adventures, but tests of your true mettle.");
+		e.self:Say("Greetings, " .. e.other:GetCleanName() .. " .  Are you a child of Order?  If you have come seeking the path of Discord. I require only that you give me your [Tome of Order and Discord] and I shall show you the way. Only then will you be freed from Order's confining restraints. Should you desire to reshape yourself and transcend the bindings of mortal identity, speak of the [king] or [queen] who lies within. For within Discord, all forms may be remade, and the self can be [reborn]. If you are drawn to the allure of the uncharted, inquire about the secret [challenges] and their hidden [rites]. These are not mere adventures, but tests of your true mettle.");
 	elseif(e.message:findi("tome")) then
 		e.self:Say("The Tome of Order and Discord was penned by the seventh member of the Tribunal and has become the key to a life of Discord, in spite of the author's pitiful warnings.  Do you not have one, child of Order?  Would you [like to read] it?");
 	elseif(e.message:findi("read")) then
@@ -14,17 +14,19 @@ function event_say(e)
 		else
 			e.self:Say("Ah, you tread the common path, where certain secrets remain veiled.");
 		end
-	elseif (e.message:findi("become a king")) then
+	elseif (e.message:findi("king")) then
 		e.self:Say("Bring me a Vial of Swirling Smoke and this token, and a King you shall be.");
+		e.other:Message(15, "Completing this quest will permanently change your gender.");
 		e.other:SummonCursorItem(13992); -- 'King'
 		return;
 
-	elseif (e.message:findi("become a queen")) then
+	elseif (e.message:findi("queen")) then
 		e.self:Say("Bring me a Vial of Swirling Smoke and this token, and a Queen you shall be.");
+		e.other:Message(15, "Completing this quest will permanently change your gender.");
 		e.other:SummonCursorItem(13993); -- 'Queen'
 		return;
 		
-	elseif(e.message:findi("newgame plus")) then
+	elseif(e.message:findi("reborn")) then
 		if (e.other:GetLevel() > 59) then
 			local stats = eq.ParseAttributes(e.message);
 			local total = stats.STR + stats.STA + stats.AGI + stats.DEX + stats.WIS + stats.INT + stats.CHA;
@@ -33,10 +35,10 @@ function event_say(e)
 			local deity = eq.FindDeity(e.message);
 			local city = eq.FindCityChoice(e.message);
 			if (gender == -1 or race == -1 or deity == -1 or city == -1 or total == 0) then
-				e.self:Say("Choose your new identity and begin a new adventure. Speak to me again and declare your [newgame plus] [gender], [race], [deity], [home city], and [attribute points].");
+				e.self:Say("To be [reborn] is to shed the weight of your past trials and embrace a new beginning. Through the path of Discord, you may start anew, carrying forward the wisdom of your journey. Fear not, your hard-won items and treasured equipment shall remain with you, symbols of your strength and perseverance. Those who walk this road will earn the title 'the Reborn' - a badge of both your sacrifice and your triumph. Speak to me again and declare your [reborn] [gender], [race], [deity], [home city], and [attribute points].");
 				e.other:Message(15, "Your [attribute points] must be written out in a format such as: 10 int 5 wis 15 cha");
 				e.other:Message(15, "Your level will be reset back to level 10, along with your faction and location. Your spells, AAs, and skill ranks will remain intact.");
-				e.other:Message(15, "Your surname will be changed to a Norrathian numeral indicating how many times you have performed newgame plus. In the future, this NPC will also add an additional last name to this Norrathian numeral.");
+				e.other:Message(15, "Your surname will be changed to a Norrathian numeral indicating how many times you have been reborn. In the future, this NPC will also add an additional last name to this Norrathian numeral.");
 				return;
 			end
 			if (e.other:PermaRace(race, deity, city, stats.STR, stats.STA, stats.AGI, stats.DEX, stats.WIS, stats.INT, stats.CHA)) then
@@ -84,7 +86,7 @@ function event_say(e)
 	else
 		if(e.message:findi("challenges")) then
 			if (e.other:GetLevel() > 59 and e.other:IsSelfFound() == 0 and e.other:IsSoloOnly() == 0 and e.other:IsHardcore() == 0) then
-				e.self:Say("Though I can't offer new challenges to a seasoned adventurer, perhaps the [newgame plus] challenge would interest you... unless you'd like trade in your gender to become a [king] or [queen].");
+				e.self:Say("Though I can't offer new challenges to a seasoned adventurer, perhaps being [reborn] would interest you... unless you'd like trade in your gender to become a [king] or [queen].");
 			else
 				e.self:Say("I can't offer you anything as you are above the first season, or have already chosen your challenges. Begone, mortal. Unless, of course, you'd like trade in your gender to become a [king] or [queen].");
 			end
