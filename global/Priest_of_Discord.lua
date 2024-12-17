@@ -24,8 +24,8 @@ function event_say(e)
 		e.other:SummonCursorItem(13993); -- 'Queen'
 		return;
 		
-	elseif(e.message:findi("newgame plus")) then
-		if (e.other:GetLevel() > 10) then
+	elseif(e.message:findi("newgame plus") and e.other:IsSelfFound() == 0 and e.other:IsSoloOnly() == 0 and e.other:IsHardcore() == 0) then
+		if (e.other:GetLevel() > 59) then
 			local stats = eq.ParseAttributes(e.message);
 			local total = stats.STR + stats.STA + stats.AGI + stats.DEX + stats.WIS + stats.INT + stats.CHA;
 			local gender = eq.FindGender(e.message);
@@ -36,6 +36,7 @@ function event_say(e)
 				e.self:Say("Choose your new identity and begin a new adventure. Speak to me again and declare your [newgame plus] [gender], [race], [deity], [home city], and [attribute points].");
 				e.other:Message(15, "Your [attribute points] must be written out in a format such as: 10 int 5 wis 15 cha");
 				e.other:Message(15, "Your level will be reset back to level 10, along with your faction and location. Your spells, AAs, and skill ranks will remain intact.");
+				e.other:Message(15, "Your surname will be changed to a Norrathian numeral indicating how many times you have performed newgame plus. In the future, this NPC will also add an additional last name to this Norrathian numeral.");
 				return;
 			end
 			if (e.other:PermaRace(race, deity, city, stats.STR, stats.STA, stats.AGI, stats.DEX, stats.WIS, stats.INT, stats.CHA)) then
@@ -82,10 +83,10 @@ function event_say(e)
 		end
 	else
 		if(e.message:findi("challenges")) then
-			if (e.other:GetLevel() > 10) then
-				e.self:Say("Though I can't offer new challenges to a seasoned adventurer, perhaps the [newgame plus] challenge would interest you.");
+			if (e.other:GetLevel() > 59 and e.other:IsSelfFound() == 0 and e.other:IsSoloOnly() == 0 and e.other:IsHardcore() == 0) then
+				e.self:Say("Though I can't offer new challenges to a seasoned adventurer, perhaps the [newgame plus] challenge would interest you... unless you'd like trade in your gender to become a [king] or [queen].");
 			else
-				e.self:Say("I can't offer you anything as you are above the first season, or have already chosen your challenges. Begone, mortal.");
+				e.self:Say("I can't offer you anything as you are above the first season, or have already chosen your challenges. Begone, mortal. Unless, of course, you'd like trade in your gender to become a [king] or [queen].");
 			end
 		elseif(e.message:findi("solo")) then
 			e.self:Say("I can't offer you anything as you are above the first season, or have already chosen your challenges. Begone, mortal.");
