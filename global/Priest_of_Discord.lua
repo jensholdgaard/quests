@@ -28,22 +28,17 @@ function event_say(e)
 		
 	elseif(e.message:findi("reborn")) then
 		if (e.other:GetLevel() > 59) then
-			local stats = eq.ParseAttributes(e.message);
-			local total = stats.STR + stats.STA + stats.AGI + stats.DEX + stats.WIS + stats.INT + stats.CHA;
-			local gender = eq.FindGender(e.message);
-			local race = eq.FindRace(e.message);
-			local deity = eq.FindDeity(e.message);
-			local city = eq.FindCityChoice(e.message);
-			if (gender == -1 or race == -1 or deity == -1 or city == -1 or total == 0) then
+			local has_data, is_valid, class, race, gender, deity, city, stats = eq.FindRebornData(e, "race gender deity city stats", false);
+			if (not has_data) then
 				e.self:Say("To be [reborn] is to shed the weight of your past trials and embrace a new beginning. Through the path of Discord, you may start anew, carrying forward the wisdom of your journey. Fear not, your hard-won items and treasured equipment shall remain with you, symbols of your strength and perseverance. Those who walk this road will earn the title 'the Reborn' - a badge of both your sacrifice and your triumph. Speak to me again and declare your [reborn] [gender], [race], [deity], [home city], and [attribute points].");
 				e.other:Message(15, "Your [attribute points] must be written out in a format such as: 10 int 5 wis 15 cha");
 				e.other:Message(15, "Your level will be reset back to level 10, along with your faction and location. Your spells, AAs, and skill ranks will remain intact.");
 				e.other:Message(15, "Your surname will be changed to a Norrathian numeral indicating how many times you have been reborn. It will be possible to change the surname's style in the future.");
 				return;
 			end
-			if (e.other:PermaRace(race, deity, city, stats.STR, stats.STA, stats.AGI, stats.DEX, stats.WIS, stats.INT, stats.CHA)) then
+			if (is_valid and e.other:PermaRace(race, deity, city, stats.STR, stats.STA, stats.AGI, stats.DEX, stats.WIS, stats.INT, stats.CHA)) then
 				e.other:SetBaseGender(gender);
-				e.other:ResetPlayerForNewGamePlus();
+				e.other:ResetPlayerForNewGamePlus(10, 255, false); -- Delevel to 10. Keep their old skill ranks, level2, and skill-points from their past-life.
 				return;
 			end
 		else
