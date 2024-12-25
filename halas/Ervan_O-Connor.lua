@@ -1,17 +1,18 @@
 function event_say(e)
 	if(e.message:findi("hail")) then
-		e.self:Emote("Hail, and well met, friend. Have you heard any news of the Truthbringer's return, or are you a [believer in truth and justice]?");
+		e.self:Emote("Hail, and well met, friend. I am Ervan OConnor, herald of Frostfallen, the Truthbearer. Have you heard any further news of the Truthbringer's return, or are you fellow [believer in Truth through Justice]?");
 	elseif(e.message:findi("believer")) then
-		e.self:Say("Aye, a believer, are ye? Tha' Shamen of Justice have let us stay in their ranks, so long as we hold Justice in addition to Truth. The two are principles myself and [my brother] believe in.");
+		e.self:Say("Aye, a believer, are ye? Tha' Shamen of Justice have let us stay in their ranks, so long as we hold Justice in hand to the Truth. Those two are principles myself and my [brother] believe in.");
 	elseif(e.message:findi("brother")) then
-		e.self:Say("My brother, Jarris, hath been acting a bit strange lately. I set the man out to find wood, and well, he has not returned.");
+		e.self:Say("My brother, Jarris, hath been acting a bit strange lately. I set the man out to find wood from the tundra, and he has not returned.");
 	end
 end
 
 function event_trade(e)
 	local item_lib = require("items");
 	if(item_lib.check_turn_in(e.self, e.trade, {item1 = 998, item2 = 32620})) then
-		e.self:Emote("gasps. 'My brother yet lives! And- ye gods, what is this?! A blade he claims forged in the Halls of Honor?! It must be a sign from Mithaniel!' He then quickly attempts repairs to the blade... but the handle slides right off, the blade falls to the ground, and shatters. 'By Erollisi's bosom! That's some godly steel, indeed. Sorry, friend. Ya can have this back.'");
+		e.self:Emote("gasps. 'My brother yet lives! And- ye gods, what is this?! A glowing, metal blade, he claims forged in the Halls of Honor?! It must be a sign from Mithaniel!' He then quickly attempts repairs to the blade... but the handle slides right off as he tries, and the blade shatters into a thousand pieces.");
+		e.self:Say("By Erollisi's bosom! That's some godly steel, indeed. Nearly took my arm off! Sorry about that mess, friend. Ya can have this hilt back... it's tha' least I can do.");
 		e.other:QuestReward(e.self,0,0,0,0,997,0);
 		e.other:Message(0, "You notice crumpled up paper within the hilt of the weapon.");
 		e.other:QuestReward(e.self,0,0,0,0,503,0);
