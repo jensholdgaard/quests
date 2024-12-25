@@ -16,11 +16,11 @@ end
 
 function event_trade(e)
 	local item_lib = require("items");
-	if(item_lib.check_turn_in(e.self, e.trade, {item1 = 14425, item2 = 12945, item3 = 12944, item4 = 12943})) then
-		e.self:Say("By Marr's Light! You found my note. Thank the Truthbringer you have arrived. I need you to visit my [brother] in Halas. Bring him this blade of [Truth]. I am still tending to my [injuries] from my fight with that... [undead Kerran].");
+	if(item_lib.check_turn_in(e.self, e.trade, {item1 = 14425})) then
+		e.self:Say("By Marr's Light! You found my note. Thank the Truthbringer you have arrived. I need you to visit my [brother] in Halas. Bring him this blade of [Truth] and my crumpled note. It will show him that I still live. I am still tending to my [injuries] from my fight with that... [undead Kerran].");
 		e.other:QuestReward(e.self,0,0,0,0,998,0);
-	elseif(item_lib.check_turn_in(e.self, e.trade, {item1 = 997, item2 = 5504, item3 = 10400, item4 = 5403})) then
-		e.other:Message(0, "begins to speak in a voice that is not his own... 'Thank you, kind spirit. You've passed my trial. Take this for your kindness. Perhaps we shall meet again in the Halls of Honor.' The world stands still for a moment, as he grants you the Soul Fragment of a Barbarian Paladin.");
+	elseif(item_lib.check_turn_in(e.self, e.trade, {item1 = 997, item2 = 5403, item3 = 12144, item4 = 13865})) then
+		e.other:Message(0, "Jarris begins to speak in a voice that is not his own... 'Thank you, kind spirit. You've passed my trial. Take this for your kindness. Perhaps we shall meet again in the Halls of Honor.' The world stands still for a moment, as he grants you the Soul Fragment of a Barbarian Paladin.");
 		e.other:QuestReward(e.self,0,0,0,0,500,0);
 		e.other:Message(15, "You can now new game plus into a Barbarian Paladin of Halas that worships either Mithaniel Marr or The Tribunal.");
 		e.other:AddCharacterCreateCombinationUnlock(eq.FindClass("paladin"), eq.FindRace("barbarian"), eq.FindDeity("tribunal"), eq.FindCityChoice("halas"), 30, 629.0, 3139.0, 0.0, 0);
