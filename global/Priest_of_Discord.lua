@@ -1,5 +1,7 @@
 function event_say(e)
 	local is_special_flag_response = false;
+	local newgameplus = require("newgameplus");
+
 	if(e.message:findi("Hail")) then
 		e.self:Say("Greetings, " .. e.other:GetCleanName() .. " .  Are you a child of Order?  If you have come seeking the path of Discord. I require only that you give me your [Tome of Order and Discord] and I shall show you the way. Only then will you be freed from Order's confining restraints. Should you desire to reshape yourself and transcend the bindings of mortal identity, speak of the [king] or [queen] who lies within. For within Discord, all forms may be remade, and the self can be [reborn]. If you are drawn to the allure of the uncharted, inquire about the secret [challenges] and their hidden [rites]. These are not mere adventures, but tests of your true mettle.");
 	elseif(e.message:findi("tome")) then
@@ -25,25 +27,9 @@ function event_say(e)
 		e.other:Message(15, "Completing this quest will permanently change your gender.");
 		e.other:SummonCursorItem(13993); -- 'Queen'
 		return;
-		
+
 	elseif(e.message:findi("reborn")) then
-		if (e.other:GetLevel() > 59) then
-			local has_data, is_valid, class, race, gender, deity, city, stats = eq.FindRebornData(e, "race gender deity city stats", false);
-			if (not has_data) then
-				e.self:Say("To be [reborn] is to shed the weight of your past trials and embrace a new beginning. Through the path of Discord, you may start anew, carrying forward the wisdom of your journey. Fear not, your hard-won items and treasured equipment shall remain with you, symbols of your strength and perseverance. Those who walk this road will earn the title 'the Reborn' - a badge of both your sacrifice and your triumph. Speak to me again and declare your [reborn] [gender], [race], [deity], [home city], and [attribute points].");
-				e.other:Message(15, "Your [attribute points] must be written out in a format such as: 10 int 5 wis 15 cha");
-				e.other:Message(15, "Your level will be reset back to level 10, along with your faction and location. Your spells, AAs, and skill ranks will remain intact.");
-				e.other:Message(15, "Your surname will be changed to a Norrathian numeral indicating how many times you have been reborn. It will be possible to change the surname's style in the future.");
-				return;
-			end
-			if (is_valid and e.other:PermaRace(race, deity, city, stats.STR, stats.STA, stats.AGI, stats.DEX, stats.WIS, stats.INT, stats.CHA)) then
-				e.other:SetBaseGender(gender);
-				e.other:ResetPlayerForNewGamePlus(10, 255, false); -- Delevel to 10. Keep their old skill ranks, level2, and skill-points from their past-life.
-				return;
-			end
-		else
-			e.other:Message(15, "You lack experience. Begone. Return to me when you are of the 60th season.");
-		end
+		newgameplus.HandleReborn(e);
 		return;
 	end
 	if(e.other:GetLevel() == 1) then
