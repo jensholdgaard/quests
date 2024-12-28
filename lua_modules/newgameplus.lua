@@ -23,20 +23,7 @@ function ng.Definitions(e)
 		isRaceChange = true,
 		curClass = "Paladin",
 		mustRaceChange = "Barbarian",  -- Must change to Barbarian, and must not already be Barbarian
-		setLevel = 10,
-		discovered = barbarianPaladinDiscovered
-	};
-
-	-- Barbarian Paladin class-change. Available to non-paladin barbarians.
-	configs[3] = {
-		name = "(Class Change) Barbarian Paladin",
-		minLevel = 1,
-		isClassChange = true,
-		curRace = "Barbarian",
-		mustClassChange = "Paladin", -- Must change to Paladin, and must not already be Paladin
-		setLevel = 10,
-		setLevel2 = 10,
-		resetPoints = true,
+		setLevel = 1,
 		discovered = barbarianPaladinDiscovered
 	};
 	configs.size = num_configs;
