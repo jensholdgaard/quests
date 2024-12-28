@@ -232,7 +232,7 @@ function ng.ValidateInput(e, data, warn)
 	if (data.class == -1) then
 		is_complete = false;
 		if (has_input and warn and not data.class_warned) then
-			data.deity_warned = true;
+			data.class_warned = true;
 			e.other:Message(15, "You must choose a [class].");
 		end
 	end
