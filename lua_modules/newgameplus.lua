@@ -19,7 +19,7 @@ function ng.Definitions(e)
 	-- Barbarian Paladin race-change. Available to non-barbarian paladins.
 	configs[2] = {
 		name = "(Race Change) Barbarian Paladin",
-		minLevel = 30,
+		minLevel = 1,
 		isRaceChange = true,
 		curClass = "Paladin",
 		mustRaceChange = "Barbarian",  -- Must change to Barbarian, and must not already be Barbarian
@@ -30,7 +30,7 @@ function ng.Definitions(e)
 	-- Barbarian Paladin class-change. Available to non-paladin barbarians.
 	configs[3] = {
 		name = "(Class Change) Barbarian Paladin",
-		minLevel = 30,
+		minLevel = 1,
 		isClassChange = true,
 		curRace = "Barbarian",
 		mustClassChange = "Paladin", -- Must change to Paladin, and must not already be Paladin
