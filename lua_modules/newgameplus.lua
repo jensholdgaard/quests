@@ -1,32 +1,48 @@
 local ng = {};
 
--- These are the allowed NG+ combinations allowed
+-- Returns the NG+ options for this character.
 function ng.Definitions(e)
 
-	local configs = {};
-	local num_configs = 3;
+	-- Required Params:
+	-- * name: (String) The name of this option. Will be printed to the user when describing their unlocked NG+ options.
+	-- * isRaceChange: (bool) Either 'isRaceChange' or 'isClassChange' must be set to 'true', but not both.
+	-- * isClassChange: (bool) Either 'isRaceChange' or 'isClassChange' must be set to 'true', but not both.
+	-- * discovered: (bool) Whether this option is discovered/unlocked by the player.
+
+	-- Optional Params:
+	-- * minLevel: (int) The min level to perform this NG+ option.
+	-- * curClass: (String) Player must currently be this class perform this NG+ option. E.g. "barbarian"
+	-- * curRace: (String) Player must currently be this race to perform this NG+ option. E.g. "warrior"
+	-- * mustRaceChange: (String) The player _must_ be reborn as this race. The player _cannot_ already be this race.
+	-- * mustClassChange: (String) The player _must_ be reborn as this class. The player _cannot_ already be this class.
+
+	-- NG+ Params
+	-- * setLevel (int, default 10): The player will be leveled down to this level. No effect if below this level already.
+	-- * setLevel2 (int, default: 255): The player's level2 will be leveled down to this level. No effect if below this level already.
+	-- * resetPoints (bool, default: false): Whether to refund the players skill points for re-training at their guild master. Generally should be 'true' only when level2 is being reset.
+
 	local barbarianPaladinDiscovered = ng.IsBarbarianPaladinUnlocked(e);
 
-	-- Default NG+: Requires level 60. Race changes. Back to level 10.
-	configs[1] = {
-		name = "(Race Change) NewGame+",
-		minLevel = 60,
-		isRaceChange = true,
-		setLevel = 10,
-		discovered = true
+	local configs = {
+		-- Default NG+: Requires level 60. Race changes. Back to level 10.
+		{
+			name = "(Race Change) NewGame+",
+			minLevel = 60,
+			isRaceChange = true,
+			setLevel = 10,
+			discovered = true
+		},
+		-- Barbarian Paladin race-change. Available to non-barbarian paladins.
+		{
+			name = "(Race Change) Barbarian Paladin",
+			minLevel = 1,
+			isRaceChange = true,
+			curClass = "Paladin",
+			mustRaceChange = "Barbarian",
+			setLevel = 1,
+			discovered = barbarianPaladinDiscovered
+		}
 	};
-
-	-- Barbarian Paladin race-change. Available to non-barbarian paladins.
-	configs[2] = {
-		name = "(Race Change) Barbarian Paladin",
-		minLevel = 1,
-		isRaceChange = true,
-		curClass = "Paladin",
-		mustRaceChange = "Barbarian",  -- Must change to Barbarian, and must not already be Barbarian
-		setLevel = 1,
-		discovered = barbarianPaladinDiscovered
-	};
-	configs.size = num_configs;
 
 	return configs;
 end
@@ -296,8 +312,7 @@ end
 function ng.PrintModes(e)
 	local definitions = ng.Definitions(e);
 	e.other:Message(15, "------- NewGame Plus Options ---------");
-	for i = 1, definitions.size do
-		local ngoption = definitions[i];
+	for key, ngoption in ipairs(definitions) do
 		local is_match, error_reason = ng.IsMeetingBaseRequirements(e, ngoption);
 		if (is_match) then
 			e.other:Message(15, "[Unlocked] " .. ngoption.name);
@@ -391,8 +406,7 @@ function ng.TryApplyOption(e, data, ngoption)
 end
 
 function ng.HasAnyOptions(e, definitions)
-	for i = 1, definitions.size do
-		local ngoption = definitions[i];
+	for key, ngoption in ipairs(definitions) do
 		if (ng.IsMeetingBaseRequirements(e, ngoption)) then
 			return true;
 		end
@@ -429,8 +443,7 @@ function ng.HandleReborn(e)
 		return; -- ValidateInput generated missing prompts.
 	end
 
-	for i = 1, definitions.size do
-		local ngoption = definitions[i];
+	for key, ngoption in ipairs(definitions) do
 		if (ng.TryApplyOption(e, data, ngoption)) then
 			return; -- PermaRace/PermaClass will generate output when attempted.
 		end
