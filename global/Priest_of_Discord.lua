@@ -1,9 +1,17 @@
 function event_say(e)
 	local is_special_flag_response = false;
 	local newgameplus = require("newgameplus");
+	local titles = require("title_manager");
 
+	if(e.message:findi("name") or e.message:findi("title")) then
+		if (titles.HandleName(e)) then
+			return;
+		end
+	end
 	if(e.message:findi("Hail")) then
-		e.self:Say("Greetings, " .. e.other:GetCleanName() .. " .  Are you a child of Order?  If you have come seeking the path of Discord. I require only that you give me your [Tome of Order and Discord] and I shall show you the way. Only then will you be freed from Order's confining restraints. Should you desire to reshape yourself and transcend the bindings of mortal identity, speak of the [king] or [queen] who lies within. For within Discord, all forms may be remade, and the self can be [reborn]. If you are drawn to the allure of the uncharted, inquire about the secret [challenges] and their hidden [rites]. These are not mere adventures, but tests of your true mettle.");
+		e.self:Say("Greetings, " .. e.other:GetCleanName() .. ". Are you a child of Order?  If you have come seeking the path of Discord. I require only that you give me your [Tome of Order and Discord] and I shall show you the way. Only then will you be freed from Order's confining restraints.");
+		e.other:Message(0, "Should you desire to reshape yourself and transcend the bindings of mortal identity, speak of the [king] or [queen] who lies within. For within Discord, all forms may be remade, and the self can be [reborn].");
+		e.other:Message(0, "If you are drawn to the allure of the uncharted, inquire about the secret [challenges] and their hidden [rites]. These are not mere adventures, but tests of your true mettle. Earn your reknown, and you will be known by many [names] across the land.");
 	elseif(e.message:findi("tome")) then
 		e.self:Say("The Tome of Order and Discord was penned by the seventh member of the Tribunal and has become the key to a life of Discord, in spite of the author's pitiful warnings.  Do you not have one, child of Order?  Would you [like to read] it?");
 	elseif(e.message:findi("read")) then
