@@ -857,12 +857,17 @@ function KromrifEliteGuard(e)
 end
 
 function WarLose(e)
-	eq.spawn_condition("thurgadina",1,0);
-	eq.spawn_condition("thurgadina",1,1);
-	eq.spawn_condition("thurgadina",2,1);
-	eq.spawn_condition("thurgadinb",4,0);
-	eq.spawn_condition("thurgadinb",4,1);
-	eq.spawn_condition("thurgadinb",5,1);
+	
+	local instanceID = eq.get_zone_guild_id();
+	
+	if(instanceID == 4294967295) then
+		eq.spawn_condition("thurgadina",1,0);
+		eq.spawn_condition("thurgadina",1,1);
+		eq.spawn_condition("thurgadina",2,1);
+		eq.spawn_condition("thurgadinb",4,0);
+		eq.spawn_condition("thurgadinb",4,1);
+		eq.spawn_condition("thurgadinb",5,1);
+	end
 	eq.signal(118137,2);
 	eq.depop_all(118043); -- Royal_Soldier
 	eq.depop_all(118041); -- Royal_Guard
