@@ -27,7 +27,7 @@ function ng.Definitions(e)
 		-- Default NG+: Requires level 60. Race changes. Back to level 10.
 		{
 			name = "(Race Change) NewGame+",
-			minLevel = 60,
+			minLevel = 11,
 			isRaceChange = true,
 			setLevel = 10,
 			discovered = true
@@ -434,6 +434,8 @@ function ng.HandleReborn(e)
 		e.other:Message(15, "Your level will be reset back to level 10, along with your faction and location. Your spells, AAs, and skill ranks will remain intact.");
 		if (e.other:GetLevel() > 59) then
 			e.other:Message(15, "Your surname will be changed to a Norrathian numeral indicating how many times you have been reborn. It will be possible to change the surname's style in the future.");
+		else
+			e.other:Message(13, "Your surname will be NOT changed as a result of this process.");
 		end
 		ng.PrintModes(e);
 		return;
