@@ -9,7 +9,7 @@ function event_say(e)
 		end
 	end
 	if(e.message:findi("Hail")) then
-		e.self:Say("Greetings, " .. e.other:GetCleanName() .. ". Are you a child of Order?  If you have come seeking the path of Discord. I require only that you give me your [Tome of Order and Discord] and I shall show you the way. Only then will you be freed from Order's confining restraints.");
+		e.self:Say("Greetings, " .. e.other:GetCleanName() .. ". Are you a child of Order?  If you have come seeking the path of Discord. I require only that you give me your [Tome of Order and Discord] and I shall show you the way. Only then will you be freed from Order's confining restraints. Or perhaps you wish to [return] to Order.");
 		e.other:Message(0, "Should you desire to reshape yourself and transcend the bindings of mortal identity, speak of the [king] or [queen] who lies within. For within Discord, all forms may be remade, and the self can be [reborn].");
 		e.other:Message(0, "If you are drawn to the allure of the uncharted, inquire about the secret [challenges] and their hidden [rites]. These are not mere adventures, but tests of your true mettle. Earn your reknown, and you will be known by many [names] across the land.");
 	elseif(e.message:findi("tome")) then
@@ -29,7 +29,12 @@ function event_say(e)
 		e.other:Message(15, "Completing this quest will permanently change your gender.");
 		e.other:SummonCursorItem(13992); -- 'King'
 		return;
-
+		
+	elseif (e.message:findi("return")) then
+		e.other:SetPVP(false);
+		e.self:Say("Very well then, child of Discord. Return to the ways of Order.");
+		return;
+		
 	elseif (e.message:findi("queen")) then
 		e.self:Say("Bring me a Vial of Swirling Smoke and this token, and a Queen you shall be.");
 		e.other:Message(15, "Completing this quest will permanently change your gender.");
