@@ -34,6 +34,17 @@ local RING_NPCS = {
 	124315, -- The_Herald_of_Vulak`Aerr 
 	124313, -- Rarthek_the_Swiftclaw 
 };
+
+
+function nothingup()
+	for k,v in pairs(RING_NPCS) do
+		if eq.get_entity_list():IsMobSpawnedByNpcTypeID(v) then
+			--eq.zone_emote(7,"<ZONE MESSAGE>: " .. v .. "is still up");
+			return false;
+		end;
+	end;
+	return true;
+end;
 local RING_CLIENT_CHECK_TIMER = 10000;	-- how often to check for clients in the ring
 local RING_END_TIMER = 180000;			-- shut down the event if no clients in range for this long
 local RING_DEBUG_MODE = false;
@@ -479,14 +490,16 @@ function GlowingOrbTimerEvent(event)
 	end
 
 	if ( event.timer == "wave" ) then
+		if nothingup() then
 		wave = wave + 1;
 		if ( RING_DEBUG_MODE ) then eq.zone_emote(7,"<ZONE MESSAGE>: Beginning Wave "..wave); end
 		RING_WAVES[wave].waveFunc(splitters);
 		
-		if ( RING_DEBUG_MODE ) then
-			eq.set_timer("wave", RING_WAVES[wave].waveTime / 10);
-		else
-			eq.set_timer("wave", RING_WAVES[wave].waveTime);
+		--if ( RING_DEBUG_MODE ) then
+		--eq.set_timer("wave", RING_WAVES[wave].waveTime / 10);
+		--else
+		--	eq.set_timer("wave", RING_WAVES[wave].waveTime);
+		--end
 		end
 		
 	elseif ( event.timer == "proximity" ) then
