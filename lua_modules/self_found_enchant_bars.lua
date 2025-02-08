@@ -176,7 +176,7 @@ end
 
 function enchant_bars.check_bars_quest_dialogue(self, other, message)
 
-    local is_self_found = other:IsSelfFound() == 1 or other:IsSoloOnly() == 1;
+    local is_self_found = other:IsSelfFound() >= 1 or other:IsSoloOnly() == 1;
     if(is_self_found) then
 
         local bar_data_list = enchant_bars._get_bar_data();
@@ -218,7 +218,7 @@ end
 
 function enchant_bars.check_for_bars_to_enchant(item_lib, self, other, trade, require_cast)
 
-    local is_self_found = other:IsSelfFound() == 1 or other:IsSoloOnly() == 1;
+    local is_self_found = other:IsSelfFound() >= 1 or other:IsSoloOnly() == 1;
 
     local bar_data_list = enchant_bars._get_bar_data();
 
