@@ -50,17 +50,27 @@ function event_say(e)
 			-- TODO: Would like to add more flavor here, potentially splitting this into multiple descriptions, one for each challenge mode
 			e.self:Say("I can offer you flags for the [solo], [self found], and [hardcore] challenges. You must tell me all of the challenges you wish to embark on in the same sentence. In the [solo] challenge, all external interactions become unavailable - as well as external buffs. In the [self found] challenge you are prevented from interacting with anyone else except others with the same flags of similar level, though you are additionally prevented from trading. There is also the [hardcore] challenge, which will result in your mortal coil being emptied - permanently - on death. You may include all three of these challenges together.");
 			e.other:Message(13, "By accepting any of these options, you will immediately be completely reset and sent back to your starting location. This will be irreversible.");
+			return;
 		end
-	
+
 		if(e.message:findi("solo")) then
 			e.self:Say("Very well. You will now play solo, without any friends.");
 			e.other:SetSoloOnly(1);
-			is_special_flag_response = true;
-		end
-		if(e.message:findi("self found")) then
-			e.self:Say("Very well. You will now play through the game using the self found ruleset.");
 			e.other:SetSelfFound(1);
 			is_special_flag_response = true;
+		elseif(e.other:IsSoloOnly() == 0 and e.message:findi("self found")) then
+			if (e.message:findi("self found classic")) then
+				e.other:SetSelfFound(1);
+				is_special_flag_response = true;
+				e.self:Say("Very well. You will now play through the game using the self found classic ruleset.");
+			elseif (e.message:findi("self found flex")) then
+				e.other:SetSelfFound(2);
+				is_special_flag_response = true;
+				e.self:Say("Very well. You will now play through the game using the self found flex ruleset.");
+			else
+				e.other:Message(15, "You must choose [self found classic] or [self found flex]. Classic is the original ruleset. Flex is the ruleset that allows grouping with normal players.");
+				return;
+			end
 		end
 		if(e.message:findi("hardcore")) then
 			e.self:Say("Very well. You will now have your character permanently unavailable upon your next death, along with all of their items.");
@@ -78,20 +88,73 @@ function event_say(e)
 		
 		if(is_special_flag_response) then
 			e.other:ClearPlayerInfoAndGrantStartingItems();
+			return;
 		end
-	else
-		if(e.message:findi("challenges")) then
-			if (e.other:GetLevel() > 59) then
-				e.self:Say("Though I can't offer new challenges to a seasoned adventurer, perhaps being [reborn] would interest you... unless you'd like trade in your gender to become a [king] or [queen].");
+
+	elseif (e.other:GetClass() >= 1) then -- Allows non-null players to downgrade challenge flags
+
+		local confirmed = e.message:findi("correct");
+
+		if (e.other:IsSoloOnly() > 0 and e.message:findi("remove solo")) then
+			if (confirmed) then
+				e.other:SetSoloOnly(0);
+				e.other:SetSelfFound(1);
+				e.other:Message(15, "Your 'Solo' status has been permanently downgraded to 'Self Found Classic'.");
 			else
-				e.self:Say("I can't offer you anything as you are above the first season, or have already chosen your challenges. Begone, mortal. Unless, of course, you'd like trade in your gender to become a [king] or [queen].");
+				e.other:Message(15, "Are you sure? This will permanently downgrade your 'Solo' challenge to 'Self Found Classic'.");
+				e.other:Message(15, "Repeat your message with [correct] to continue.");
 			end
-		elseif(e.message:findi("solo")) then
-			e.self:Say("I can't offer you anything as you are above the first season, or have already chosen your challenges. Begone, mortal.");
-		elseif(e.message:findi("self found")) then
-			e.self:Say("I can't offer you anything as you are above the first season, or have already chosen your challenges. Begone, mortal.");
-		elseif(e.message:findi("hardcore")) then
-			e.self:Say("I can't offer you anything as you are above the first season, or have already chosen your challenges. Begone, mortal.");
+			return;
+		end
+
+		if (e.other:IsSoloOnly() == 0 and e.other:IsSelfFound() == 1 and e.message:findi("remove self found classic")) then
+			if (confirmed) then
+				e.other:SetSelfFound(2);
+				e.other:Message(15, "Your 'Self Found Classic' challenge status has been downgraded to 'Self Found Flex'. You may now group with normal players.");
+			else
+				e.other:Message(15, "Are you sure? This will permanently downgrade your 'Self Found Classic' challenge to 'Self Found Flex'.");
+				e.other:Message(15, "Repeat your message with [correct] to continue.");
+			end
+			return;
+		end
+
+		if (e.other:IsSoloOnly() == 0 and e.other:IsSelfFound() == 2 and e.message:findi("remove self found flex")) then
+			if (confirmed) then
+				e.other:SetSelfFound(0);
+				e.other:Message(15, "Your 'Self Found Flex' challenge has been removed.");
+			else
+				e.other:Message(15, "Are you sure? This will permanently remove your 'Self Found Flex' status and return your character to normal.");
+				e.other:Message(15, "Repeat your message with [correct] to continue.");
+			end
+			return;
+		end
+
+		if (e.other:IsHardcore() == 1 and e.message:findi("remove hardcore")) then
+			if (confirmed) then
+				e.other:SetHardcore(0);
+				e.other:Message(15, "Your 'Hardcore' challenge has been removed.");
+			else
+				e.other:Message(15, "Are you sure? This will permanently remove your 'Hardcore' status.");
+				e.other:Message(15, "Repeat your message with [correct] to continue.");
+			end
+			return;
+		end
+	end
+
+	if (e.message:findi("challenge") and e.other:GetLevel() > 1) then
+		e.self:Say("Though I can't offer new challenges to a seasoned adventurer, perhaps being [reborn] would interest you... unless you'd like trade in your gender to become a [king] or [queen].");
+	end
+
+	if (e.message:findi("challenge") and e.other:GetClass() >= 1) then
+		if (e.other:IsHardcore() == 1) then
+			e.other:Message(15, "You may [remove hardcore] to change your character to the Softcore ruleset.");
+		end
+		if (e.other:IsSoloOnly() == 1) then
+			e.other:Message(15, "You may [remove solo] to change your character to Self Found Classic ruleset.");
+		elseif (e.other:IsSelfFound() == 1) then
+			e.other:Message(15, "You may [remove self found classic] to change your character to Self Found Flex ruleset.");
+		elseif (e.other:IsSelfFound() == 2) then
+			e.other:Message(15, "You may [remove self found flex] to change your character to the Normal ruleset.");
 		end
 	end
 end
