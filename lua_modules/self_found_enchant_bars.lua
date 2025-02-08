@@ -8,29 +8,33 @@ function enchant_bars._check_bar_type(item_lib, self, other, trade, bar_data, re
     local plat_cost = bar_data.plat_cost;
 
     if (other:GetLevel() >= required_level) then
-        -- Handin: bar
-        if(item_lib.check_turn_in(self, trade, {item1 = bar_id, item2 = bar_id, item3 = bar_id, item4 = bar_id, platinum = plat_cost * 4}, 0)) then
-            num_bars = 4;
-        elseif(item_lib.check_turn_in(self, trade, {item1 = bar_id, item2 = bar_id, item3 = bar_id, platinum = plat_cost * 3}, 0)) then	
-            num_bars = 3;
-        elseif(item_lib.check_turn_in(self, trade, {item1 = bar_id, item2 = bar_id, platinum = plat_cost * 2}, 0)) then
-            num_bars = 2;
-        elseif(item_lib.check_turn_in(self, trade, {item1 = bar_id, platinum = plat_cost}, 0)) then
-            num_bars = 1;
-        end
+
+        local plat_remaining = trade.platinum or 0;
+        local reagent_count = item_lib.count_handed_item(self, trade, {bar_id});
         
-        if(num_bars > 0) then
-            repeat
-                other:SummonCursorItem(reward_id, 1); -- Enchanted Bar
-                num_bars = num_bars - 1;
-            until num_bars == 0
+        if (plat_remaining >= plat_cost and reagent_count > 0) then
             if(require_cast) then
                 self:Say("Behold, the transformation is complete. May this enchantment serve as a testament to your growing intellect and mastery over the arcane. Use it with keen insight on your journey.");
                 self:CastSpell(667,self:GetID()); -- Spell: Enchant Silver
             else
                 self:Say("Here you go.");
             end
-        end	
+
+            while (plat_remaining >= plat_cost and reagent_count > 0) do
+                other:QuestReward(self,0,0,0,0,reward_id);
+                plat_remaining = plat_remaining - plat_cost;
+                reagent_count = reagent_count - 1;
+            end
+        end
+
+        -- Return remaining reagents (ran out of plat)
+        while (reagent_count > 0) do
+            other:SummonItem(bar_id, 1, 9999, true);
+            reagent_count = reagent_count - 1;
+        end
+
+        -- Return remaining platinum (ran out of reagents)
+        trade.platinum = plat_remaining;
     end
 end
 
