@@ -51,7 +51,7 @@ function ng.Definitions(e)
 			curClass = "Beastlord",
 			mustRaceChange = "Wood Elf",
 			setLevel = 1,
-			discovered = barbarianPaladinDiscovered
+			discovered = woodelfBeastlordDiscovered
 		}
 	};
 
@@ -63,7 +63,7 @@ function ng.IsBarbarianPaladinUnlocked(e)
 		   (e.other:HasCharacterCreateCombination(ng.FindClass("paladin"), ng.FindRace("barbarian"), ng.FindDeity("tribunal"),  ng.FindCityChoice("halas")));
 end
 
-function ng.IsWoodElfBeastlordUnlockedUnlocked(e)
+function ng.IsWoodElfBeastlordUnlocked(e)
 	return (e.other:HasCharacterCreateCombination(ng.FindClass("beastlord"), ng.FindRace("wood elf"), ng.FindDeity("tunare"), ng.FindCityChoice("kelethin")));
 end
 
