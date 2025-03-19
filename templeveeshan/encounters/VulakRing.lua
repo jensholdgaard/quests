@@ -1,5 +1,5 @@
 local RING_NPCS = {
-	124316, -- Essence_of_Veeshan
+	124128, -- Vulak`Aerr
 	124287, -- an_emerald_hatchling 
 	124285, -- an_onyx_hatchling 
 	124288, -- a_cerulean_hatchling 
@@ -430,6 +430,8 @@ function EndRingEvent()
 	for _, id in ipairs(RING_NPCS) do
 		eq.depop_all(id);
 	end
+	
+	eq.depop_all(124316);
 	
 	if ( not victory ) then
 		eq.depop(124128); -- #Vulak`Aerr
