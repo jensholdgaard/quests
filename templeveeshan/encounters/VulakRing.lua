@@ -1,5 +1,5 @@
 local RING_NPCS = {
-	124316, -- Vulak`Aerr
+	124128, -- Vulak
 	124287, -- an_emerald_hatchling 
 	124285, -- an_onyx_hatchling 
 	124288, -- a_cerulean_hatchling 
@@ -42,9 +42,15 @@ function nothingup()
 			--eq.zone_emote(7,"<ZONE MESSAGE>: " .. v .. "is still up");
 			return false;
 		end;
+
+		if eq.get_entity_list():IsMobSpawnedByNpcTypeID(124128) then
+			return false;
+		end;
+
 	end;
 	return true;
 end;
+
 local RING_CLIENT_CHECK_TIMER = 10000;	-- how often to check for clients in the ring
 local RING_END_TIMER = 180000;			-- shut down the event if no clients in range for this long
 local RING_DEBUG_MODE = false;
