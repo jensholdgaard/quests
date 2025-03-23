@@ -35,15 +35,48 @@ local RING_NPCS = {
 	124313, -- Rarthek_the_Swiftclaw 
 };
 
+local RING_NPCS_DEPOP = {
+	124316, -- Essence_of_Veeshan
+	124287, -- an_emerald_hatchling 
+	124285, -- an_onyx_hatchling 
+	124288, -- a_cerulean_hatchling 
+	124286, -- a_crimson_hatchling 
+	124297, -- a_pearl_destroyer 
+	124298, -- a_crimson_destroyer 
+	124294, -- an_onyx_warden 400 dmg
+	124291, -- a_cerulean_warden 400 dmg war
+	124289, -- a_jade_warden 400 dmg
+	124296, -- a_molten_warden 400 dmg
+	124295, -- an_onyx_warden 340 dmg
+	124290, -- a_jade_warden 340 dmg
+	124299, -- a_crimson_warden 340 dmg
+	124292, -- a_cerulean_warden 340 dmg war
+	124293, -- a_cerulean_warden 340 dmg cleric
+	124300, -- a_molten_destroyer 
+	124302, -- an_onyx_destroyer 
+	124301, -- a_cerulean_destroyer 
+	124303, -- a_jade_destroyer 
+	124308, -- a_swiftclaw_racnar 
+	124309, -- a_tiger_stripe_racnar 
+	124307, -- an_onyx_Templar 
+	124305, -- a_jade_templar 
+	124304, -- a_crimson_templar 
+	124306, -- a_cerulean_templar 
+	124311, -- an_acolyte_of_Veeshan 
+	124319, -- an_acolyte_of_Veeshan 
+	124318, -- a_templar_of_Veeshan
+	124310, -- a_carrion_drake 
+	124314, -- Vethrol_the_Skycaller 
+	124312, -- Zruk_the_Lifestealer 
+	124315, -- The_Herald_of_Vulak`Aerr 
+	124313, -- Rarthek_the_Swiftclaw 
+};
+
 
 function nothingup()
 	for k,v in pairs(RING_NPCS) do
 		if eq.get_entity_list():IsMobSpawnedByNpcTypeID(v) then
 			--eq.zone_emote(7,"<ZONE MESSAGE>: " .. v .. "is still up");
-			return false;
-		end;
-
-		if eq.get_entity_list():IsMobSpawnedByNpcTypeID(124128) then
 			return false;
 		end;
 
@@ -433,7 +466,7 @@ end
 
 function EndRingEvent()
 	
-	for _, id in ipairs(RING_NPCS) do
+	for _, id in ipairs(RING_NPCS_DEPOP) do
 		eq.depop_all(id);
 	end
 	
