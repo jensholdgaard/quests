@@ -1,5 +1,5 @@
 local RING_NPCS = {
-	124128, -- Vulak`Aerr
+	124316, -- Vulak`Aerr
 	124287, -- an_emerald_hatchling 
 	124285, -- an_onyx_hatchling 
 	124288, -- a_cerulean_hatchling 
@@ -383,7 +383,7 @@ local RING_WAVES = {
 	[23] = {
 		waveTime = 1000,
 		waveFunc = function()
-			eq.depop(124128); -- #Vulak`Aerr
+			--eq.depop(124128); -- #Vulak`Aerr
 			EndRingEvent();
 		end
 	},
