@@ -1,2 +1,2 @@
 eq.load_encounter("shawleight");
-eq.load_encounter("stormfeather");
+--eq.load_encounter("stormfeather");
