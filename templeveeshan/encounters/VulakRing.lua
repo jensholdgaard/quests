@@ -615,7 +615,7 @@ function SlayEvent(event)
 		if ( event.self:GetID() == 0 or event.self:GetID() == event.other:GetID()) then
 			return;
 		end
-		--eq.spawn2(124310, 0, 0, event.other:GetX(), event.other:GetY(), event.other:GetZ() + 5, 1); -- a_carrion_drake 
+		eq.unique_spawn(124310, 0, 0, event.other:GetX(), event.other:GetY(), event.other:GetZ() + 5, 1); -- a_carrion_drake 
 	end
 end
 
