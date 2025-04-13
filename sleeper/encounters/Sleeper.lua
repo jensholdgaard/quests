@@ -59,6 +59,9 @@ local GRID = {
 };
 
 function ControllerSignal(e)
+
+	return;
+
 	if ( e.signal == 1 ) then
 		local sleeper = eq.get_entity_list():GetNPCByNPCTypeID(SLEEPER_TYPE);
 		if ( not sleeper.valid ) then
