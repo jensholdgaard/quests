@@ -405,6 +405,10 @@ function Zrelik2Say(e)
 		if(eq.get_entity_list():IsMobSpawnedByNpcTypeID(118048)) then
 			CorbinHelp(e);
 		end
+	elseif(e.message:findi("the kromrif are attacking") and wave < 19) then
+		e.self:Shout("" .. e.other:GetCleanName() .. " has spotted tha' next wave! Charge!");
+		eq.stop_timer("StartWave");
+		eq.start_timer("StartWave", 1000);
 	end
 end
 
