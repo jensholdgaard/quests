@@ -1072,22 +1072,27 @@ function CheckSurvivor(e)
 	if(eq.get_entity_list():IsMobSpawnedByNpcTypeID(118055)) then -- check Churn
 		ChurnSurvive = 1;
 		eq.depop(118055);
+		e.self:AddItem(1746, 1, false); -- Crown of Narandi, do not equip
 	end
 	if(eq.get_entity_list():IsMobSpawnedByNpcTypeID(118048)) then -- check Corbin
 		CorbinSurvive = 1;
 		eq.depop(118048);
+		e.self:AddItem(1744, 4, false); -- Earring of the Frozen Skull, 4 charges, do not equip
 	end
 	if(eq.get_entity_list():IsMobSpawnedByNpcTypeID(118057)) then -- check Dobbin
 		DobbinSurvive = 1;
 		eq.depop(118057);
+		e.self:AddItem(1743, 1, false); -- Faceguard of Bentos the Hero, do not equip
 	end
 	if(eq.get_entity_list():IsMobSpawnedByNpcTypeID(118058)) then -- check Garadain
 		GaradainSurvive = 1;
 		eq.depop(118058);
+		e.self:AddItem(1742, 1, false); -- Choker of the Wretched, do not equip
 	end
 	if(eq.get_entity_list():IsMobSpawnedByNpcTypeID(118056)) then -- check Kargin
 		KarginSurvive = 1;
 		eq.depop(118056);
+		e.self:AddItem(1745, 1, false); -- Eye of Narandi, do not equip
 	end
 end
 
@@ -1139,7 +1144,7 @@ function Churn2Trade(e)
 		e.other:Faction(e.self,405,25); -- dain
 		e.other:Faction(e.self,448,-10); -- kzek
 		e.other:Faction(e.self,419,-50); -- krif
-		e.other:QuestReward(e.self,{items = {1741,1746},exp = 5000}); -- Crown of Narandi
+		e.other:QuestReward(e.self,{items = {1741},exp = 5000});
 		eq.depop();
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
@@ -1154,7 +1159,7 @@ function Corbin2Trade(e)
 		e.other:Faction(e.self,405,25); -- dain
 		e.other:Faction(e.self,448,-10); -- kzek
 		e.other:Faction(e.self,419,-50); -- krif
-		e.other:QuestReward(e.self,{items = {1741,1744},exp = 5000}); -- Earring of the Frozen Skull
+		e.other:QuestReward(e.self,{items = {1741},exp = 5000});
 		eq.depop();
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
@@ -1169,7 +1174,7 @@ function Dobbin2Trade(e)
 		e.other:Faction(e.self,405,25); -- dain
 		e.other:Faction(e.self,448,-10); -- kzek
 		e.other:Faction(e.self,419,-50); -- krif
-		e.other:QuestReward(e.self,{items = {1741,1743},exp = 5000}); -- Faceguard of Bentos the Hero.
+		e.other:QuestReward(e.self,{items = {1741},exp = 5000});
 		eq.depop();
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
@@ -1184,7 +1189,7 @@ function Garadain2Trade(e)
 		e.other:Faction(e.self,405,25); -- dain
 		e.other:Faction(e.self,448,-10); -- kzek
 		e.other:Faction(e.self,419,-50); -- krif
-		e.other:QuestReward(e.self,{items = {1741,1742},exp = 5000}); -- Choker of the Wretched
+		e.other:QuestReward(e.self,{items = {1741},exp = 5000});
 		eq.depop();
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
@@ -1199,7 +1204,7 @@ function Kargin2Trade(e)
 		e.other:Faction(e.self,405,25); -- dain
 		e.other:Faction(e.self,448,-10); -- kzek
 		e.other:Faction(e.self,419,-50); -- krif
-		e.other:QuestReward(e.self,{items = {1741,1745},exp = 5000}); -- Eye of Narandi
+		e.other:QuestReward(e.self,{items = {1741},exp = 5000});
 		eq.depop();
 	end
 	item_lib.return_items(e.self, e.other, e.trade)
