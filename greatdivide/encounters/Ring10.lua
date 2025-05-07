@@ -196,6 +196,9 @@ function WarSignal(e)
 		eq.set_timer("WarEnd",120000);
 	elseif(e.signal == 4) then
 		eq.set_timer("Reset", 7200000);
+	elseif(e.signal == 5) then
+               eq.stop_timer("StartWave");
+               eq.set_timer("StartWave", 1000);
 	end
 end
 
@@ -407,8 +410,7 @@ function Zrelik2Say(e)
 		end
 	elseif(e.message:findi("the kromrif are attacking") and wave < 19) then
 		e.self:Shout("" .. e.other:GetCleanName() .. " has spotted tha' next wave! Charge!");
-		eq.stop_timer("StartWave");
-		eq.set_timer("StartWave", 1000);
+                eq.signal(118137, 5);
 	end
 end
 
