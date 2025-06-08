@@ -15,9 +15,8 @@ end
 function event_trade(e)
 	local item_lib = require("items");
 	
-	if(item_lib.check_turn_in(e.self, e.trade, {item1 = 27265, item2 = 27329}, 0)) then -- Sleeper's Key and Prismatic Dragon Scale
+	if(item_lib.check_turn_in(e.self, e.trade, {item1 = 27329}, 0)) then -- Prismatic Dragon Scale
 		e.self:Say("Thank you for returning this to us. Here is your reward, imbued with the essence of a fool who held one of the keys to our Masters prison. If you are unhappy with your reward, return it to us and perhaps we can give you something more appropriate. ");
-		e.other:KeyRingRemove(e.self, 27265); -- Sleeper's Key
 		e.other:QuestReward(e.self,0,0,0,0,2698); -- Essence Lens
 		e.other:Faction(e.self,1526,10);
 		e.other:Faction(e.self,430,10);
