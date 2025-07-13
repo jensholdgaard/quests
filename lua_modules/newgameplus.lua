@@ -21,9 +21,6 @@ function ng.Definitions(e)
 	-- * setLevel2 (int, default: 255): The player's level2 will be leveled down to this level. No effect if below this level already.
 	-- * resetPoints (bool, default: false): Whether to refund the players skill points for re-training at their guild master. Generally should be 'true' only when level2 is being reset.
 
-	local barbarianPaladinDiscovered = ng.IsBarbarianPaladinUnlocked(e);
-	local woodelfBeastlordDiscovered = ng.IsWoodElfBeastlordUnlocked(e);
-
 	local configs = {
 		-- Default NG+: Requires level 60. Race changes. Back to level 10.
 		{
@@ -32,39 +29,10 @@ function ng.Definitions(e)
 			isRaceChange = true,
 			setLevel = 10,
 			discovered = true
-		},
-		-- Barbarian Paladin race-change. Available to non-barbarian paladins.
-		{
-			name = "(Race Change) Barbarian Paladin",
-			minLevel = 1,
-			isRaceChange = true,
-			curClass = "Paladin",
-			mustRaceChange = "Barbarian",
-			setLevel = 1,
-			discovered = barbarianPaladinDiscovered
-		},
-		-- Welf Bst race-change. Available to non-welf bst.
-		{
-			name = "(Race Change) Wood Elf Beastlord",
-			minLevel = 1,
-			isRaceChange = true,
-			curClass = "Beastlord",
-			mustRaceChange = "Wood Elf",
-			setLevel = 1,
-			discovered = woodelfBeastlordDiscovered
 		}
 	};
 
 	return configs;
-end
-
-function ng.IsBarbarianPaladinUnlocked(e)
-	return (e.other:HasCharacterCreateCombination(ng.FindClass("paladin"), ng.FindRace("barbarian"), ng.FindDeity("mithaniel"), ng.FindCityChoice("halas"))) or
-		   (e.other:HasCharacterCreateCombination(ng.FindClass("paladin"), ng.FindRace("barbarian"), ng.FindDeity("tribunal"),  ng.FindCityChoice("halas")));
-end
-
-function ng.IsWoodElfBeastlordUnlocked(e)
-	return (e.other:HasCharacterCreateCombination(ng.FindClass("beastlord"), ng.FindRace("wood elf"), ng.FindDeity("tunare"), ng.FindCityChoice("kelethin")));
 end
 
 
