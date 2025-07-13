@@ -77,15 +77,7 @@ function event_say(e)
 			e.other:SetHardcore(1);
 			is_special_flag_response = true;
 		end
-		
-		if(e.message:findi("i want to suffer")) then
-			e.self:Say("Very well, then. Welcome to true Discord.");
-			e.other:SetSelfFound(1);
-			e.other:SetHardcore(1);
-			e.other:SetBaseClass(0);
-			is_special_flag_response = true;
-		end
-		
+				
 		if(is_special_flag_response) then
 			e.other:ClearPlayerInfoAndGrantStartingItems();
 			return;
