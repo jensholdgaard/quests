@@ -372,6 +372,10 @@ function ng.TryApplyOption(e, data, ngoption)
 	local PermaFunction = nil; -- PermaRace or PermaClass
 	local param1 = -1; -- race or class depending on PermaFunction
 
+	if(e.other:GetNGRespecsRemaining() > 0) then
+		newLevel = e.other:GetLevel();
+	end
+
 	if (ngoption.isRaceChange) then
 		PermaFunction = e.other.PermaRace;
 		param1 = data.race;
@@ -385,6 +389,9 @@ function ng.TryApplyOption(e, data, ngoption)
 	if (PermaFunction(e.other, param1, data.deity, data.city, data.stats.STR, data.stats.STA, data.stats.AGI, data.stats.DEX, data.stats.WIS, data.stats.INT, data.stats.CHA)) then
 		e.other:SetBaseGender(data.gender);
 		e.other:ResetPlayerForNewGamePlus(newLevel, newLevel2, resetPoints);
+		if(e.other:GetNGRespecsRemaining() > 0) then
+			e.other:ConsumeNGRespec();
+		end
 	end
 	return true;
 end
@@ -415,7 +422,13 @@ function ng.HandleReborn(e)
 
 	if (not has_input) then
 		e.self:Say("To be [reborn] is to shed the weight of your past trials and embrace a new beginning. Through the path of Discord, you may start anew, carrying forward the wisdom of your journey. Fear not, your hard-won items and treasured equipment shall remain with you, symbols of your strength and perseverance. Those who walk this road, and are of the 60th season, will earn the title 'the Reborn' - a badge of both your sacrifice and your triumph. Speak to me again and declare your [reborn] [race], [class], [gender], [deity], [home city], and [attribute points].");
-		e.other:Message(15, "Your level will be reset back to level 10, along with your faction and location. Your spells, AAs, and skill ranks will remain intact.");
+		
+		if(e.other:GetNGRespecsRemaining() > 0) then
+			e.other:Message(15, "You have a new game plus reset token. Your faction and location will be reset and your level will remain the same. Upon performing this reset, you will lose one new game plus respec token. Your spells, AAs, and skill ranks will remain intact.");
+		else
+			e.other:Message(15, "Your level will be reset back to level 10, along with your faction and location. Your spells, AAs, and skill ranks will remain intact.");
+		end
+		
 		if (e.other:GetLevel() > 59) then
 			e.other:Message(15, "Your surname will be changed to a Norrathian numeral indicating how many times you have been reborn. It will be possible to change the surname's style in the future.");
 		else
